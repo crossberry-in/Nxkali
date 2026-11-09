@@ -4,7 +4,7 @@
  *
  * Modeled on CodeServerManager: the manager owns ONE dedicated long-lived
  * proot process per VM (one-shot execs die with --kill-on-exit, so a VM
- * needs its own process). The QEMU process runs INSIDE the Ubuntu proot
+ * needs its own process). The QEMU process runs INSIDE the Kali Linux proot
  * environment — exactly the M1-verified execution path — and exposes:
  *   - VNC display bound to 127.0.0.1 only (spec: localhost, no password;
  *     proot does not create a network namespace, so the app can connect)
@@ -26,7 +26,7 @@
  * tested via the GitHub Actions APK pipeline only when pushed; the QEMU
  * command set and the VNC protocol path are verified in the M1 gate and
  * tools/emulator/verify_vnc_path.py on real QEMU 7.2.22 (M1 gate); the
- * guest runtime apt-installs QEMU 8.2 from Ubuntu noble. The VM
+ * guest runtime apt-installs QEMU 8.2 from Kali Linux kali-rolling. The VM
  * dies with the app process (M8 adds background lifecycle); snapshots and
  * SAF disk import are M3/M4.
  */
@@ -60,7 +60,7 @@ sealed class VmState {
     /** Short setup phase: dirs, config, kernel provisioning. */
     data class Preparing(val detail: String) : VmState()
 
-    /** qemu-system-aarch64 is being installed into the Ubuntu rootfs via apt. */
+    /** qemu-system-aarch64 is being installed into the Kali Linux rootfs via apt. */
     data class InstallingRuntime(val lines: List<String>) : VmState()
 
     /** QEMU process spawned, the guest has not opened the VNC port yet.
@@ -581,7 +581,7 @@ class NoxOsEmulatorManager(
         private const val TAG = "NOXS_EMULATOR"
         private const val TAG_QEMU = "NOXS_QEMU"
 
-        /** qemu-system-aarch64 path inside the Ubuntu rootfs (M1 manifest). */
+        /** qemu-system-aarch64 path inside the Kali Linux rootfs (M1 manifest). */
         const val QEMU_GUEST_PATH: String = "usr/bin/qemu-system-aarch64"
 
         /** Cap on the live log tail published to the UI. */
