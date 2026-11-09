@@ -173,7 +173,7 @@ Each carries the full release automation (`.github/workflows/pkg.yml`,
 `nx install tree` resolves, verifies and installs straight from that
 repository's releases. See `nx-pkg/README.md`.
 
-## Distro packages — `nx pkg` (Debian / Ubuntu)
+## Distro packages — `nx pkg` (Debian / Kali Linux)
 
 `nx pkg` is the distro-aware front end on top of the Git package system:
 
@@ -187,7 +187,7 @@ nx pkg remove <name> [-y]       # remove via apt or the Noxs manifest
 nx pkg doctor                   # health check for the whole package layer
 ```
 
-On Debian and Ubuntu guests dependency resolution, download and actual
+On Debian and Kali Linux guests dependency resolution, download and actual
 installation stay inside the **native apt engine**: `apt-get --print-uris`
 supplies the file list, sizes and SHA-256 hashes straight from the signed
 repository metadata; every downloaded `.deb` is re-verified against that
