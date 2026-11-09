@@ -101,9 +101,9 @@ class NoxsWelcomeTest {
         return out
     }
 
-    private fun stubOsRelease(pretty: String = "Ubuntu 24.04.5 LTS"): File =
+    private fun stubOsRelease(pretty: String = "Kali Linux.5 LTS"): File =
         temporary.newFile("os-release").apply {
-            writeText("PRETTY_NAME=\"$pretty\"\nID=ubuntu\nVERSION_ID=\"24.04\"\nVERSION_CODENAME=noble\n")
+            writeText("PRETTY_NAME=\"$pretty\"\nID=kali\nVERSION_ID=\"24.04\"\nVERSION_CODENAME=kali-rolling\n")
         }
 
     private fun visibleLines(out: String): List<String> =
@@ -119,7 +119,7 @@ class NoxsWelcomeTest {
     fun `default render shows branding, real facts and quick start in a unicode box`() {
         val out = runRenderer("COLUMNS" to "56", osRelease = stubOsRelease())
         assertTrue(out.contains("Noxs Linux"))
-        assertTrue(out.contains("Ubuntu 24.04.5 LTS"))
+        assertTrue(out.contains("Kali Linux.5 LTS"))
         assertTrue(out.contains(realUname("-m")))
         assertTrue(out.contains("kernel ${realUname("-r")}"))
         assertTrue(out.contains("Quick Start"))
@@ -201,7 +201,7 @@ class NoxsWelcomeTest {
             "bash --rcfile '${rc.absolutePath}' -i -c 'exit 0'"
         // -c 'exit 0' makes the child's lifetime deterministic: util-linux
         // versions differ on whether stdin EOF reaches the pty child (glibc
-        // closes the master, Ubuntu 24.04 leaves bash waiting for input
+        // closes the master, Kali Linux leaves bash waiting for input
         // forever). stdout is still the pty script(1) provides, so the
         // [ -t 1 ] guard in the rcfile sees a real interactive session.
         val pb = ProcessBuilder(scriptBinary(), "-qec", cmd, "/dev/null")
