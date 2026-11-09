@@ -1,17 +1,17 @@
 /*
  * Noxs — original implementation.
- * Ubuntu-first migration manager (Ubuntu-first spec §9).
+ * Kali Linux-first migration manager (Kali Linux-first spec §9).
  *
  * Existing Noxs installations ship a Debian 12 (bookworm) userspace. The
- * Ubuntu-first migration NEVER silently erases user data:
+ * Kali Linux-first migration NEVER silently erases user data:
  *
  *   1. DETECT — the install marker decides: a marker with suite=bookworm (or
- *      without distro=ubuntu) identifies a legacy Debian environment.
+ *      without distro=kali) identifies a legacy Debian environment.
  *   2. BACK UP — /home/noxs and /root (the user's real data) plus
  *      /etc/noxs/resources.conf are archived into app-private storage
  *      (files/noxs/migration/) via a proot one-shot tar, so the user can
- *      restore their files into the Ubuntu environment afterwards.
- *   3. MIGRATE — only an explicit user action starts the Ubuntu install; the
+ *      restore their files into the Kali Linux environment afterwards.
+ *   3. MIGRATE — only an explicit user action starts the Kali Linux install; the
  *      legacy environment keeps working until the user removes it through
  *      the explicit, confirmed removal path (NoxsEnvironmentManager.remove).
  *
@@ -43,7 +43,7 @@ object NoxsMigrationManager {
 
     /**
      * Reads the install marker and classifies the environment. Returns
-     * "ubuntu" for a fresh Ubuntu-first install, "debian" for a legacy
+     * "kali" for a fresh Kali Linux-first install, "debian" for a legacy
      * Debian install, "unknown" when the marker is missing or unreadable.
      */
     fun classifyInstall(installMarker: File): String {
@@ -52,15 +52,15 @@ object NoxsMigrationManager {
         val value = { key: String ->
             lines.firstOrNull { it.startsWith("$key=") }?.substringAfter('=')?.trim()
         }
-        // distro=ubuntu wins; an explicit suite=bookworm or a missing distro
+        // distro=kali wins; an explicit suite=bookworm or a missing distro
         // key with any suite is legacy Debian.
         when (value("distro")) {
-            "ubuntu" -> return "ubuntu"
+            "kali" -> return "kali"
             "debian" -> return "debian"
         }
         return when (value("suite")) {
             null -> "unknown"
-            "noble" -> "ubuntu"
+            "kali-rolling" -> "kali"
             else -> "debian"
         }
     }
@@ -93,7 +93,7 @@ object NoxsMigrationManager {
     /**
      * Archives the planned user data through a proot one-shot tar into the
      * migration directory. The archive stays in app-private storage — the
-     * user can restore it into the Ubuntu environment with `tar -xzf`.
+     * user can restore it into the Kali Linux environment with `tar -xzf`.
      */
     fun performBackup(
         paths: NoxsPaths,
