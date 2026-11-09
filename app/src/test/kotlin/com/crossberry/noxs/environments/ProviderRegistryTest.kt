@@ -45,9 +45,9 @@ class ProviderRegistryTest {
         assertEquals(CompatibilityLevel.SUPPORTED, kali.checkCompatibility(device()).level)
     }
 
-    @Test fun `kali ships a single kali-rolling variant marked default`() {
+    @Test fun `kali ships a single kali-rootless variant marked default`() {
         val variants = KaliProvider().variants()
-        assertEquals(listOf("kali-rolling"), variants.map { it.id })
+        assertEquals(listOf("kali-rootless"), variants.map { it.id })
         assertTrue(variants.single().isDefault)
         // Pinned official cdimage kali-base 24.04.5 arm64 archive size.
         assertEquals(29_936_675L, variants.single().downloadBytesEstimate)
@@ -85,7 +85,7 @@ class ProviderRegistryTest {
     @Test fun `environment json round trip survives single-env registry`() {
         val env = Environment(
             id = "kali", providerId = "kali", displayName = "Kali Linux (NetHunter Rootless)",
-            version = "", architecture = "arm64-v8a", variant = "kali-rolling",
+            version = "", architecture = "arm64-v8a", variant = "kali-rootless",
             status = EnvironmentStatus.READY, storagePath = "/data/noxs/environments/kali",
             createdAt = 1L, updatedAt = 2L
         )
