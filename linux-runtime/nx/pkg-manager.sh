@@ -41,16 +41,13 @@ pkgm_rc() { # CODE -> numeric exit code
 pkgm_detect_os() { # sets PKG_OS (debian|kali|unknown), PKG_PM (apt-get|apt|"")
     PKG_OS="unknown"; PKG_PM=""
     if [ -f "$PKG_OS_RELEASE" ]; then
-        local id like
+        local id
         id=$(sed -n 's/^ID=//p' "$PKG_OS_RELEASE" | tr -d '"')
-        like=$(sed -n 's/^ID_LIKE=//p' "$PKG_OS_RELEASE" | tr -d '"')
+        # Explicitly support Kali and legacy Debian only; Ubuntu is not a guest target.
         case "$id" in
             debian) PKG_OS="debian" ;;
             kali) PKG_OS="kali" ;;
-            *) case "$like" in
-                   *debian*)  PKG_OS="debian" ;;
-                   *kali*)  PKG_OS="kali" ;;
-               esac ;;
+            *) PKG_OS="unknown" ;;
         esac
     fi
     if command -v apt-get >/dev/null 2>&1; then PKG_PM="apt-get"
