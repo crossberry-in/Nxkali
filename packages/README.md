@@ -6,7 +6,7 @@ APT integration for the Noxs Debian userspace.
 |----------------|-----------------------------------------------------------------|
 | `apt/`         | apt configuration snippets installed into the rootfs            |
 | `metadata/`    | JSON schema for `bootstrap.manifest` (URL + SHA-256 pins)       |
-| `repositories/`| Reference `sources.list` files per Debian/Ubuntu release        |
+| `repositories/`| Reference `sources.list` files per Debian/Kali Linux release        |
 
 Rules:
 
