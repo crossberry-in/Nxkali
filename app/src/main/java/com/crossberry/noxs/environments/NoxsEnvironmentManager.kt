@@ -1,11 +1,11 @@
 /*
  * Noxs — original implementation.
- * NoxsEnvironmentManager (spec §2, §32-§35, §50, Ubuntu-first §9):
+ * NoxsEnvironmentManager (spec §2, §32-§35, §50, Kali Linux-first §9):
  * provider discovery, environment registry, active-environment switching,
  * legacy Debian import (migration source) and safe removal.
  *
  * The registry lives in app-private storage (environments/registry.json).
- * Fresh installs use Ubuntu 24.04 LTS ONLY (no Debian download path).
+ * Fresh installs use Kali Linux (NetHunter Rootless) ONLY (no Debian download path).
  * Existing (pre-migration) Debian installations of upgrading users are
  * detected and imported as a read-only legacy environment — never deleted,
  * never reinstalled, user data preserved (spec §9 migration).
@@ -134,7 +134,7 @@ class NoxsEnvironmentManager(private val context: Context) {
      * Legacy Debian installation of an UPGRADING user detected (spec §9
      * migration): import it read-only as the migration source, set it active
      * so nothing breaks, no reinstall, no data erasure. Fresh installs never
-     * hit this path — they install Ubuntu 24.04 LTS through UbuntuProvider.
+     * hit this path — they install Kali Linux (NetHunter Rootless) through Kali LinuxProvider.
      */
     private fun importLegacyInstall() {
         if (!legacyPaths.isInstalled()) return
@@ -212,7 +212,7 @@ class NoxsEnvironmentManager(private val context: Context) {
         if (taskManager.isRunning(id)) return false
         if (env.storagePath.startsWith(legacyPaths.base.absolutePath)) {
             // Legacy Debian removal also clears the legacy markers so the
-            // next start routes through the Ubuntu installer honestly.
+            // next start routes through the Kali Linux installer honestly.
             runCatching { legacyPaths.installMarker.delete() }
         }
         taskManager.removeEnvironmentFiles(env)
@@ -231,7 +231,7 @@ class NoxsEnvironmentManager(private val context: Context) {
 
     fun terminalProfile(id: String): TerminalProfile? {
         val env = environmentFor(id) ?: return null
-        // One environment: the Ubuntu profile (the legacy Debian import keeps
+        // One environment: the Kali Linux profile (the legacy Debian import keeps
         // the "android" prompt host so pre-migration installs stay unchanged).
         return TerminalProfile(
             environmentId = env.id,
@@ -241,7 +241,7 @@ class NoxsEnvironmentManager(private val context: Context) {
             home = "/home/noxs",
             workingDirectory = "/home/noxs",
             environmentVariables = mapOf("NOXS" to "1"),
-            promptHost = if (env.storagePath == legacyPaths.base.absolutePath) "android" else "ubuntu"
+            promptHost = if (env.storagePath == legacyPaths.base.absolutePath) "android" else "kali"
         )
     }
 
