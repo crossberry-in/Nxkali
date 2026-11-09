@@ -852,7 +852,7 @@ pkgm_doctor_cmd() {
         local src_host
         src_host=$(sed -n 's/^URIs://p' "${noxs_sources}" 2>/dev/null | head -n 1 | sed 's|.*://||; s|/.*||')
         case "$src_host" in
-            ports.kali.com|archive.kali.com)
+            http.kali.org)
                 say "PASS  Kali Linux repositories ($src_host)"
                 ;;
             "")
@@ -860,7 +860,7 @@ pkgm_doctor_cmd() {
                 fails=$((fails + 1))
                 ;;
             *)
-                say "FAIL  unexpected APT host $src_host (expected ports.kali.com)"
+                say "FAIL  unexpected APT host $src_host (expected http.kali.org)"
                 fails=$((fails + 1))
                 ;;
         esac
