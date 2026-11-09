@@ -263,27 +263,10 @@ cf_transport() {
 # Used to self-heal a missing or truncated noxs.sources instead of refusing
 # to repair.
 cf_write_sources() {
-    cf_arch="$(dpkg --print-architecture 2>/dev/null || uname -m 2>/dev/null || echo arm64)"
-    case "§cf_arch" in
-        amd64|x86_64)
-            cf_repo_main="https://archive.kali.com/kali"
-            cf_repo_sec="https://security.kali.com/kali"
-            ;;
-        *)
-            cf_repo_main="https://ports.kali.com/kali-ports"
-            cf_repo_sec="https://ports.kali.com/kali-ports"
-            ;;
-    esac
     cf_root sh -c "cat > '§1'" <<CFEOF
 Types: deb
-URIs: §{cf_repo_main}
-Suites: kali-rolling kali-rolling-updates kali-rolling-backports
-Components: main contrib non-free non-free-firmware
-Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg
-
-Types: deb
-URIs: §{cf_repo_sec}
-Suites: kali-rolling-security
+URIs: https://http.kali.org/kali
+Suites: kali-rolling
 Components: main contrib non-free non-free-firmware
 Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg
 CFEOF
