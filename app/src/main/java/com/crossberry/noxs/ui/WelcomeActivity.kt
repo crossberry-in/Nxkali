@@ -27,7 +27,7 @@ class WelcomeActivity : AppCompatActivity() {
         val app = application as com.crossberry.noxs.NoxsApplication
         // An environment is ready when a fresh install finished OR the legacy
         // Debian install of an upgrading user was imported (spec §9 migration:
-        // existing data is kept, fresh installs use Ubuntu 24.04 LTS only).
+        // existing data is kept, fresh installs use Kali Linux (NetHunter Rootless) only).
         val ready = app.environments.environments.value.any { it.status == EnvironmentStatus.READY }
 
         binding.btnTerminal.isEnabled = ready
@@ -38,7 +38,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.btnSetup.setOnClickListener {
             // No separate download/checklist screen: setup IS the real
-            // terminal console (one environment — Ubuntu 24.04 LTS).
+            // terminal console (one environment — Kali Linux (NetHunter Rootless)).
             startActivity(
                 Intent(
                     this,
