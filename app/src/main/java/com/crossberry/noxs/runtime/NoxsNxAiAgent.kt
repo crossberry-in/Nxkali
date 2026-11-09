@@ -263,7 +263,7 @@ Environment:
 - working directory: {cwd}
 - architecture: {arch}
 - operating system: {os_name}
-- package manager: apt (Ubuntu 24.04 LTS)
+- package manager: apt (Kali Linux (NetHunter Rootless))
 - session id: {session_id}
 
 Rules:
