@@ -2,7 +2,7 @@ name: Import Noxs source into NxKali
 
 on:
   push:
-    branches: [kali-port]
+    branches: [main, kali-port]
     paths:
       - ".github/workflows/nxkali-import.yml"
   workflow_dispatch:
