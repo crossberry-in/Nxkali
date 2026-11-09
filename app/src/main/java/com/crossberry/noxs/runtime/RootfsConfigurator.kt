@@ -9,8 +9,8 @@
  * Content mirrors linux-runtime/rootfs/overlay (CI diff-checks both).
  *
  * Kali Linux-first: the rootfs is the genuine Kali Linux NetHunter Rootless (kali-rolling) base
- * image; APT sources are the official Kali Linux repositories (ports.kali.com
- * for arm64/armhf, archive.kali.com for amd64). No Debian sources exist.
+ * image; APT sources are the official Kali Linux repositories (http.kali.org
+ * for arm64/armhf, http.kali.org for amd64). No Debian sources exist.
  */
 package com.crossberry.noxs.runtime
 
@@ -139,7 +139,7 @@ object RootfsConfigurator {
      * Keep exactly one active APT definition. The stock Kali Linux base image
      * ships kali.sources; remove it and any other active .list/.sources
      * files so APT sees only the Noxs Noble, updates, backports, and security
-     * repositories (ports.kali.com on arm64/armhf, archive.kali.com on
+     * repositories (http.kali.org on arm64/armhf, http.kali.org on
      * amd64).
      */
     fun configureAptSources(paths: NoxsPaths, useHttps: Boolean, arch: String = "arm64-v8a") {
@@ -310,7 +310,7 @@ object RootfsConfigurator {
             File(rootfs, "etc/profile.d/noxs-pkg-guard.sh").setExecutable(false)
             installWelcomeLib(rootfs)
             val marker = "# --- Noxs interactive shell setup ---"
-            val snippet = bashrcSnippet("android", "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})", "apt update")
+            val snippet = bashrcSnippet("android", "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})", "apt update")
             listOf(
                 File(rootfs, "etc/bash.bashrc"),
                 File(rootfs, "home/noxs/.bashrc"),
@@ -605,7 +605,7 @@ object RootfsConfigurator {
     private fun ensureNoxsUserAndBashrc(
         rootfs: File,
         hostLabel: String = "android",
-        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
+        banner: String = "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update"
     ) {
         val etc = File(rootfs, "etc")
@@ -698,7 +698,7 @@ object RootfsConfigurator {
         f.writeText(content)
     }
 
-    private fun motd(banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})"): String = """
+    private fun motd(banner: String = "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})"): String = """
         Welcome to Noxs ($banner userspace)
 
         * All operations run inside the Android app sandbox — you have full
@@ -713,11 +713,11 @@ object RootfsConfigurator {
 
     /**
      * Official Kali Linux repositories ONLY (Kali Linux-first spec — no Debian).
-     * arm64/armhf guests live on ports.kali.com (including the security
-     * pocket); amd64 (x86_64 app builds) uses archive.kali.com +
-     * security.kali.com. Signed-By points at the kali-archive-keyring.gpg
+     * arm64/armhf guests live on http.kali.org (including the security
+     * pocket); amd64 (x86_64 app builds) uses http.kali.org +
+     * http.kali.org. Signed-By points at the kali-archive-keyring.gpg
      * that ships inside the genuine kali-base image (verified: the
-     * `kali-keyring` package is installed there).
+     * `kali-archive-keyring` package is installed there).
      */
     private fun aptSources(useHttps: Boolean, arch: String = "arm64-v8a"): String {
         val scheme = if (useHttps) "https" else "http"
@@ -995,7 +995,7 @@ object RootfsConfigurator {
     internal fun ensureNoxsUser(
         rootfs: File,
         hostLabel: String = "android",
-        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
+        banner: String = "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update"
     ) {
         ensureNoxsUserAndBashrc(rootfs, hostLabel, banner, hint)
