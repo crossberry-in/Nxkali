@@ -4,7 +4,7 @@
  * the environment's real package manager. UI code NEVER constructs raw
  * package-manager commands.
  *
- * Noxs ships exactly ONE environment — Ubuntu 24.04 LTS — so the only
+ * Noxs ships exactly ONE environment — Kali Linux (NetHunter Rootless) — so the only
  * adapter is
  * apt. The lookup still goes through [PackageManagerKind] so optional
  * component installs degrade honestly (null) instead of guessing.
