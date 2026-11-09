@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/kali_desktop_hint"
-        android:textColor="@color/noxs_text_primary"
+        android:textColor="@color/noxs_text"
         android:padding="8dp" />
 
     <EditText
