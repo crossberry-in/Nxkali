@@ -35,7 +35,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rsync -a --exclude='.git' upstream-noxs/ ./
+          # Workflow files are added separately through the repository connector,
+          # because the Actions token intentionally cannot write workflow files.
+          rsync -a --exclude='.git' --exclude='.github/workflows/***' upstream-noxs/ ./
           rm -rf upstream-noxs
           test -f settings.gradle.kts
           test -f app/build.gradle.kts
