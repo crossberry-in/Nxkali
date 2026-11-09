@@ -1,7 +1,7 @@
 # Noxs Built-in App Ecosystem
 
 Status: implementation plan / first integration milestone
-Target: Android host application (not the Ubuntu guest desktop)
+Target: Android host application (not the Kali Linux guest desktop)
 
 ## Goal
 
