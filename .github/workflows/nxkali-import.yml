@@ -1,0 +1,58 @@
+name: Import Noxs source into NxKali
+
+on:
+  push:
+    branches: [kali-port]
+    paths:
+      - ".github/workflows/nxkali-import.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nxkali-source-import
+  cancel-in-progress: false
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout NxKali
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Checkout Noxs source
+        uses: actions/checkout@v4
+        with:
+          repository: crossberry-in/noxs
+          ref: main
+          path: upstream-noxs
+
+      - name: Copy complete source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -a --exclude='.git' upstream-noxs/ ./
+          rm -rf upstream-noxs
+          test -f settings.gradle.kts
+          test -f app/build.gradle.kts
+          test -f LICENSE
+          echo "Imported source files:"
+          git status --short | wc -l
+
+      - name: Commit and push imported source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No source changes to import."
+            exit 0
+          fi
+          git commit -m "Import complete Noxs source tree into NxKali"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
