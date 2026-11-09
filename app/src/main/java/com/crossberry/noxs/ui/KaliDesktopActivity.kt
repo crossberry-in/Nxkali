@@ -70,7 +70,7 @@ class KaliDesktopActivity : AppCompatActivity() {
                 return@Thread
             }
             manager = kex
-            val result = kex.start()
+            val result = if (kex.isReady()) KaliKexManager.Result(true, "KeX already running") else kex.start()
             if (!result.success) {
                 secret.fill('\u0000')
                 runOnUiThread {
