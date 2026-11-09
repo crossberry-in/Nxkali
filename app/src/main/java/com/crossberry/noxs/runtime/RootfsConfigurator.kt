@@ -49,7 +49,7 @@ object RootfsConfigurator {
         paths: NoxsPaths,
         bootstrapHttpApt: Boolean,
         hostLabel: String,
-        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
+        banner: String = "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update",
         arch: String = "arm64-v8a"
     ) {
