@@ -1,13 +1,13 @@
 /*
  * Noxs — original implementation.
- * Builtin environment providers (spec §2-§8 of the Ubuntu-first spec).
+ * Builtin environment providers (spec §2-§8 of the Kali Linux-first spec).
  *
- * Ubuntu 24.04 LTS (Noble Numbat) is the one and only environment for fresh
+ * Kali Linux (NetHunter Rootless) is the one and only environment for fresh
  * installs: installed through the proven NoxsInstaller pipeline (staged
  * downloads, TarGuard extraction, signed APT bootstrap) from the pinned,
- * official cdimage.ubuntu.com ubuntu-base ARM64 artifact. There is no
+ * official kali.download kali-base ARM64 artifact. There is no
  * distribution selector and no Debian fallback — the installer downloads and
- * installs ONLY the genuine Ubuntu 24.04 LTS ARM64 rootfs.
+ * installs ONLY the genuine Kali Linux (NetHunter Rootless) ARM64 rootfs.
  *
  * Existing (pre-migration) Debian installations of upgrading users are NOT
  * providers: they are imported read-only as a legacy environment by
@@ -21,20 +21,20 @@ import com.crossberry.noxs.environments.model.EnvironmentCapability
 import com.crossberry.noxs.environments.model.CompatibilityReport
 import com.crossberry.noxs.environments.model.EnvironmentVariant
 
-// ------------------------------------------------------------------ Ubuntu
+// ------------------------------------------------------------------ Kali Linux
 
 /**
- * Ubuntu 24.04 LTS (Noble Numbat) — the one Noxs environment (Ubuntu-first
+ * Kali Linux (NetHunter Rootless) — the one Noxs environment (Kali Linux-first
  * spec). Installation runs the proven NoxsInstaller pipeline (staged
  * downloads, TarGuard extraction, signed APT bootstrap) against the official
- * cdimage.ubuntu.com ubuntu-base artifact, then configures the official
- * Ubuntu repositories (ports.ubuntu.com on arm64, archive.ubuntu.com on
- * amd64) and the `noxs@ubuntu:~$` terminal identity.
+ * kali.download kali-base artifact, then configures the official
+ * Kali Linux repositories (ports.kali.com on arm64, archive.kali.com on
+ * amd64) and the `noxs@kali:~$` terminal identity.
  */
-class UbuntuProvider : EnvironmentProvider {
-    override val id = "ubuntu"
-    override val displayName = "Ubuntu 24.04 LTS"
-    override val description = "Genuine Ubuntu 24.04 LTS (Noble Numbat) userspace"
+class KaliProvider : EnvironmentProvider {
+    override val id = "kali"
+    override val displayName = "Kali Linux (NetHunter Rootless)"
+    override val description = "Genuine Kali Linux (NetHunter Rootless) userspace"
     override val recommended = true
 
     override suspend fun runInstall(ctx: com.crossberry.noxs.environments.InstallContext,
@@ -42,8 +42,8 @@ class UbuntuProvider : EnvironmentProvider {
         val installer = com.crossberry.noxs.runtime.NoxsInstaller(
             ctx.context, ctx.paths, ctx.launcher, ctx.isCancelled
         ).apply {
-            promptHostLabel = "ubuntu"
-            distroBanner = "Noxs Ubuntu 24.04 LTS (noble)"
+            promptHostLabel = "kali"
+            distroBanner = "Noxs Kali Linux (kali-rolling)"
         }
         val progress = object : com.crossberry.noxs.runtime.NoxsInstaller.Progress {
             override fun onStep(step: Int, titleRes: Int, detail: String) {
@@ -84,11 +84,11 @@ class UbuntuProvider : EnvironmentProvider {
 
     override fun variants(): List<EnvironmentVariant> = listOf(
         EnvironmentVariant(
-            id = "noble",
-            name = "Ubuntu 24.04 LTS (Noble Numbat)",
-            description = "Genuine Ubuntu 24.04 LTS arm64 — the only Noxs environment",
-            downloadBytesEstimate = 29_936_675L,
-            extractedBytesEstimate = 101_000_000L,
+            id = "kali-rootless",
+            name = "Kali Linux (NetHunter Rootless)",
+            description = "Genuine Kali Linux (NetHunter Rootless) arm64 — the only Noxs environment",
+            downloadBytesEstimate = 125_829_120L,
+            extractedBytesEstimate = 900_000_000L,
             isDefault = true
         )
     )
@@ -96,13 +96,13 @@ class UbuntuProvider : EnvironmentProvider {
     override fun checkCompatibility(device: DeviceProfile): CompatibilityReport =
         com.crossberry.noxs.environments.CompatibilityEngine.report(
             device = device,
-            requiredStorageBytes = StorageRequirements.forVariant(29_936_675L, 101_000_000L)
+            requiredStorageBytes = StorageRequirements.forVariant(125_829_120L, 900_000_000L)
         )
 }
 
-// NOTE: Noxs ships exactly ONE environment — Ubuntu 24.04 LTS (noble). There
-// is no Debian/Ubuntu selector and no Debian fallback: the install pipeline
-// downloads the pinned official Ubuntu base rootfs only. Legacy Debian
+// NOTE: Noxs ships exactly ONE environment — Kali Linux (NetHunter Rootless) (kali-rolling). There
+// is no Debian/Kali Linux selector and no Debian fallback: the install pipeline
+// downloads the pinned official Kali Linux base rootfs only. Legacy Debian
 // installs of upgrading users are imported by NoxsEnvironmentManager as a
 // read-only migration source (spec §9) — they are not providers.
 
@@ -112,7 +112,7 @@ class UbuntuProvider : EnvironmentProvider {
 object ProviderRegistry {
 
     fun createAll(termuxInstalled: Boolean): List<EnvironmentProvider> = listOf(
-        UbuntuProvider()
+        KaliProvider()
     )
 
     fun findById(providers: List<EnvironmentProvider>, id: String): EnvironmentProvider? =
