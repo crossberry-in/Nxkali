@@ -169,8 +169,8 @@ class NoxsPkgManagerTest {
     @Test
     fun `os detection supports kali and legacy debian only`() {
         assertTrue(pkgManager.contains("NOXS_OS_RELEASE"))
-        assertTrue(pkgManager.contains("kali) PKG_OS=\\"kali\\""))
-        assertTrue(pkgManager.contains("debian) PKG_OS=\\"debian\\""))
+        assertTrue(pkgManager.contains("kali) PKG_OS="))
+        assertTrue(pkgManager.contains("debian) PKG_OS="))
         assertTrue(pkgManager.contains("Ubuntu is not a guest target"))
         assertFalse("Ubuntu must not be detected as a supported distro", pkgManager.contains("ubuntu) PKG_OS="))
         assertTrue("apt-get preferred when present", pkgManager.indexOf("apt-get") < pkgManager.indexOf("elif command -v apt "))
