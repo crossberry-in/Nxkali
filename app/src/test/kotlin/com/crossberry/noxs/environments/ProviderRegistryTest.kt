@@ -7,7 +7,7 @@ import com.crossberry.noxs.environments.model.EnvironmentStatus
 import com.crossberry.noxs.environments.model.EnvJson
 import com.crossberry.noxs.environments.providers.ProviderRegistry
 import com.crossberry.noxs.environments.providers.StorageRequirements
-import com.crossberry.noxs.environments.providers.UbuntuProvider
+import com.crossberry.noxs.environments.providers.KaliProvider
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -15,19 +15,19 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Provider discovery for the SINGLE-environment Noxs: Ubuntu 24.04 LTS
- * (Noble Numbat) is the one and only provider (Ubuntu-first spec). There is
+ * Provider discovery for the SINGLE-environment Noxs: Kali Linux (NetHunter Rootless)
+ * (Kali Rolling) is the one and only provider (Kali Linux-first spec). There is
  * no Debian provider and no distribution selector — fresh installs download
- * and install ONLY the genuine Ubuntu rootfs.
+ * and install ONLY the genuine Kali Linux rootfs.
  */
 class ProviderRegistryTest {
 
     private fun device(abi: String = "arm64-v8a", storage: Long = 16L * 1024 * 1024 * 1024) =
         DeviceProfile(abi, listOf(abi), 29, 4L * 1024 * 1024 * 1024, storage, true)
 
-    @Test fun `exactly one environment is discovered - ubuntu`() {
+    @Test fun `exactly one environment is discovered - kali`() {
         val providers = ProviderRegistry.createAll(termuxInstalled = false)
-        assertEquals(listOf("ubuntu"), providers.map { it.id })
+        assertEquals(listOf("kali"), providers.map { it.id })
     }
 
     @Test fun `no debian provider exists anywhere in the registry`() {
@@ -38,33 +38,33 @@ class ProviderRegistryTest {
         assertTrue(providers.size == 1)
     }
 
-    @Test fun `ubuntu is the recommended default and is supported on arm64`() {
-        val ubuntu = ProviderRegistry.createAll(false).first { it.id == "ubuntu" }
-        assertTrue(ubuntu.recommended)
-        assertEquals("Ubuntu 24.04 LTS", ubuntu.displayName)
-        assertEquals(CompatibilityLevel.SUPPORTED, ubuntu.checkCompatibility(device()).level)
+    @Test fun `kali is the recommended default and is supported on arm64`() {
+        val kali = ProviderRegistry.createAll(false).first { it.id == "kali" }
+        assertTrue(kali.recommended)
+        assertEquals("Kali Linux (NetHunter Rootless)", kali.displayName)
+        assertEquals(CompatibilityLevel.SUPPORTED, kali.checkCompatibility(device()).level)
     }
 
-    @Test fun `ubuntu ships a single noble variant marked default`() {
-        val variants = UbuntuProvider().variants()
-        assertEquals(listOf("noble"), variants.map { it.id })
+    @Test fun `kali ships a single kali-rolling variant marked default`() {
+        val variants = KaliProvider().variants()
+        assertEquals(listOf("kali-rolling"), variants.map { it.id })
         assertTrue(variants.single().isDefault)
-        // Pinned official cdimage ubuntu-base 24.04.5 arm64 archive size.
+        // Pinned official cdimage kali-base 24.04.5 arm64 archive size.
         assertEquals(29_936_675L, variants.single().downloadBytesEstimate)
         assertTrue(variants.single().extractedBytesEstimate > 0L)
     }
 
-    @Test fun `ubuntu capabilities cover the full feature set`() {
-        val caps = UbuntuProvider().capabilities()
+    @Test fun `kali capabilities cover the full feature set`() {
+        val caps = KaliProvider().capabilities()
         assertTrue(caps.contains(EnvironmentCapability.TERMINAL))
         assertTrue(caps.contains(EnvironmentCapability.SUDO))
         assertTrue(caps.contains(EnvironmentCapability.PACKAGE_MANAGER))
         assertTrue(caps.contains(EnvironmentCapability.CODE_SERVER))
     }
 
-    @Test fun `findById still resolves the ubuntu provider`() {
+    @Test fun `findById still resolves the kali provider`() {
         val providers = ProviderRegistry.createAll(false)
-        assertEquals("ubuntu", ProviderRegistry.findById(providers, "ubuntu")?.id)
+        assertEquals("kali", ProviderRegistry.findById(providers, "kali")?.id)
     }
 
     @Test fun `apt adapter is the only package manager translation`() {
@@ -84,9 +84,9 @@ class ProviderRegistryTest {
 
     @Test fun `environment json round trip survives single-env registry`() {
         val env = Environment(
-            id = "ubuntu", providerId = "ubuntu", displayName = "Ubuntu 24.04 LTS",
-            version = "", architecture = "arm64-v8a", variant = "noble",
-            status = EnvironmentStatus.READY, storagePath = "/data/noxs/environments/ubuntu",
+            id = "kali", providerId = "kali", displayName = "Kali Linux (NetHunter Rootless)",
+            version = "", architecture = "arm64-v8a", variant = "kali-rolling",
+            status = EnvironmentStatus.READY, storagePath = "/data/noxs/environments/kali",
             createdAt = 1L, updatedAt = 2L
         )
         val restored = Environment.fromJson(env.toJson())
@@ -100,10 +100,10 @@ class ProviderRegistryTest {
         assertEquals("quote\" backslash\\ newline\n", parsed["a"])
     }
 
-    @Test fun `legacy debian id never collides with the ubuntu provider id`() {
+    @Test fun `legacy debian id never collides with the kali provider id`() {
         // The read-only migration import uses the "debian" id; the provider
         // registry must never offer it (no Debian download path exists).
-        assertFalse("ubuntu" == "debian")
+        assertFalse("kali" == "debian")
         assertEquals(null, ProviderRegistry.findById(ProviderRegistry.createAll(false), "debian"))
     }
 }
