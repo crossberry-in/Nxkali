@@ -74,7 +74,7 @@ class NoxsInstaller(
 
     /** Shell prompt label + banner for the configured userspace (spec §4). */
     var promptHostLabel: String = "kali"
-    var distroBanner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})"
+    var distroBanner: String = "Noxs Kali Linux (${NoxsConstants.DEFAULT_KALI_RELEASE})"
 
     suspend fun install(progress: Progress): InstallResult = withContext(Dispatchers.IO) {
         progress0 = progress
