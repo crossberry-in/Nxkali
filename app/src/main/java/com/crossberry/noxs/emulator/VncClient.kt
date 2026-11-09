@@ -215,7 +215,7 @@ class VncClient(
         } finally {
             runCatching { socket?.close() }
             dataOut = null
-            authPassword?.fill('\\u0000')
+            authPassword?.fill('\u0000')
             listener.onClosed(error)
         }
     }
