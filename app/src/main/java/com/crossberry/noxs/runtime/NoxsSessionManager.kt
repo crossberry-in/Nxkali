@@ -1,6 +1,6 @@
 /*
  * Noxs — original implementation.
- * Session manager: creates/holds terminal sessions bound to the Ubuntu
+ * Session manager: creates/holds terminal sessions bound to the Kali Linux
  * userspace, enforces the session quota, and keeps them alive behind the
  * foreground service. Every session registers with the NoxsActivityCenter so
  * the Activity Center, floating panel and notification share one state source.
@@ -67,7 +67,7 @@ class NoxsSessionManager(
         session.mainThreadDispatcher = { MainLoop.post(it) }
 
         // Write immediate header into the emulator buffer so the terminal view
-        // is never blank while proot initializes the Ubuntu userspace.
+        // is never blank while proot initializes the Kali Linux userspace.
         val userTag = if (loginAsRoot) "root@noxs" else "noxs@android"
         // Session header only — the welcome dashboard is rendered by the
         // guest shell (/usr/local/lib/noxs-welcome.sh) with REAL system facts,
@@ -88,7 +88,7 @@ class NoxsSessionManager(
         // Register with the Activity Center (single source of truth for state).
         val activity = center?.register(
             title = "Terminal — $name",
-            command = "proot · Ubuntu 24.04",
+            command = "proot · Kali Linux",
             sessionId = name,
             kind = NoxsActivityKind.SESSION,
             pid = session.pid.takeIf { it > 0 },
