@@ -1,6 +1,6 @@
 /*
  * Noxs — original implementation.
- * Configures the extracted Ubuntu rootfs into the Noxs userspace:
+ * Configures the extracted Kali Linux rootfs into the Noxs userspace:
  *  - writes overlay files (profile.d, environment, motd, apt sources, DNS)
  *  - installs the `noxs` CLI (code-server, services, sockets, processes)
  *  - installs Android proot-compatible `su` and `sudo` wrappers
@@ -8,9 +8,9 @@
  *  - ensures /run, /var/run, /var/run/noxs, /var/log/noxs exist (FHS)
  * Content mirrors linux-runtime/rootfs/overlay (CI diff-checks both).
  *
- * Ubuntu-first: the rootfs is the genuine Ubuntu 24.04 LTS (noble) base
- * image; APT sources are the official Ubuntu repositories (ports.ubuntu.com
- * for arm64/armhf, archive.ubuntu.com for amd64). No Debian sources exist.
+ * Kali Linux-first: the rootfs is the genuine Kali Linux NetHunter Rootless (kali-rolling) base
+ * image; APT sources are the official Kali Linux repositories (ports.kali.com
+ * for arm64/armhf, archive.kali.com for amd64). No Debian sources exist.
  */
 package com.crossberry.noxs.runtime
 
@@ -31,7 +31,7 @@ object RootfsConfigurator {
 
     fun configure(context: Context, paths: NoxsPaths) = configure(paths)
 
-    /** Configure the Ubuntu sources as HTTP only while bootstrapping signed CA packages. */
+    /** Configure the Kali Linux sources as HTTP only while bootstrapping signed CA packages. */
     fun configure(context: Context, paths: NoxsPaths, bootstrapHttpApt: Boolean) =
         configure(paths, bootstrapHttpApt)
 
@@ -42,14 +42,14 @@ object RootfsConfigurator {
 
     /**
      * [hostLabel] / [banner] / [hint] parameterize the shell prompt
-     * (noxs@ubuntu — spec §4 default terminal identity), the welcome banner
-     * and the first-steps hint. The defaults are the Ubuntu-first identity.
+     * (noxs@kali — spec §4 default terminal identity), the welcome banner
+     * and the first-steps hint. The defaults are the Kali Linux-first identity.
      */
     fun configure(
         paths: NoxsPaths,
         bootstrapHttpApt: Boolean,
         hostLabel: String,
-        banner: String = "Noxs Ubuntu ${NoxsConstants.DEFAULT_UBUNTU_VERSION_ID} LTS (${NoxsConstants.DEFAULT_UBUNTU_RELEASE})",
+        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update",
         arch: String = "arm64-v8a"
     ) {
@@ -103,7 +103,7 @@ object RootfsConfigurator {
         writeFile(File(rootfs, "etc/hosts"), HOSTS)
         writeFile(File(rootfs, "etc/hostname"), "noxs\n")
 
-        // --- APT configuration (one Ubuntu source file, isolated to this rootfs) ---
+        // --- APT configuration (one Kali Linux source file, isolated to this rootfs) ---
         configureAptSources(paths, useHttps = !bootstrapHttpApt, arch = arch)
         writeFile(File(rootfs, "etc/apt/apt.conf.d/70noxs"), APT_CONF)
         repairDpkgPermissions(paths)
@@ -132,14 +132,14 @@ object RootfsConfigurator {
         // --- Ensure `noxs` user and interactive bashrc prompt/banner ---
         ensureNoxsUserAndBashrc(rootfs, hostLabel, banner, hint)
 
-        NoxsLog.i("RootfsConfig", "Ubuntu userspace configured")
+        NoxsLog.i("RootfsConfig", "Kali Linux userspace configured")
     }
 
     /**
-     * Keep exactly one active APT definition. The stock Ubuntu base image
-     * ships ubuntu.sources; remove it and any other active .list/.sources
+     * Keep exactly one active APT definition. The stock Kali Linux base image
+     * ships kali.sources; remove it and any other active .list/.sources
      * files so APT sees only the Noxs Noble, updates, backports, and security
-     * repositories (ports.ubuntu.com on arm64/armhf, archive.ubuntu.com on
+     * repositories (ports.kali.com on arm64/armhf, archive.kali.com on
      * amd64).
      */
     fun configureAptSources(paths: NoxsPaths, useHttps: Boolean, arch: String = "arm64-v8a") {
@@ -310,7 +310,7 @@ object RootfsConfigurator {
             File(rootfs, "etc/profile.d/noxs-pkg-guard.sh").setExecutable(false)
             installWelcomeLib(rootfs)
             val marker = "# --- Noxs interactive shell setup ---"
-            val snippet = bashrcSnippet("android", "Noxs Ubuntu ${NoxsConstants.DEFAULT_UBUNTU_VERSION_ID} LTS (${NoxsConstants.DEFAULT_UBUNTU_RELEASE})", "apt update")
+            val snippet = bashrcSnippet("android", "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})", "apt update")
             listOf(
                 File(rootfs, "etc/bash.bashrc"),
                 File(rootfs, "home/noxs/.bashrc"),
@@ -337,7 +337,7 @@ object RootfsConfigurator {
     // 7: adds plug-lib.sh (nx plug Noxs Plugin Store) to existing environments
     // 8: adds cert-fix.sh (nx cert-fix — APT/CA repair + curl/wget provisioning)
     // 9: removes env-lib.sh + the `nx env` dispatcher (multi-OS environments
-    //    retired; Ubuntu 24.04 LTS is the one environment). The migration deletes
+    //    retired; Kali Linux NetHunter Rootless is the one environment). The migration deletes
     //    the stale guest lib so no orphan script lingers on existing installs.
     // 10: rewrites cert-fix.sh — apt-get update is now verified beyond the
     //    exit code (strict error mode + output scan + populated-lists check)
@@ -605,7 +605,7 @@ object RootfsConfigurator {
     private fun ensureNoxsUserAndBashrc(
         rootfs: File,
         hostLabel: String = "android",
-        banner: String = "Noxs Ubuntu ${NoxsConstants.DEFAULT_UBUNTU_VERSION_ID} LTS (${NoxsConstants.DEFAULT_UBUNTU_RELEASE})",
+        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update"
     ) {
         val etc = File(rootfs, "etc")
@@ -681,7 +681,7 @@ object RootfsConfigurator {
      * Always replace it with the sandbox defaults (still user-editable in
      * Settings afterwards).
      *
-     * Any existing file or symlink is deleted first: ubuntu-base ships
+     * Any existing file or symlink is deleted first: kali-base ships
      * resolv.conf as a symlink to /run/systemd/resolve/stub-resolv.conf,
      * which is dangling under proot (no systemd) — writeText through a
      * dangling symlink throws ENOENT, and through a real symlink it would
@@ -698,7 +698,7 @@ object RootfsConfigurator {
         f.writeText(content)
     }
 
-    private fun motd(banner: String = "Noxs Ubuntu ${NoxsConstants.DEFAULT_UBUNTU_VERSION_ID} LTS (${NoxsConstants.DEFAULT_UBUNTU_RELEASE})"): String = """
+    private fun motd(banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})"): String = """
         Welcome to Noxs ($banner userspace)
 
         * All operations run inside the Android app sandbox — you have full
@@ -712,44 +712,22 @@ object RootfsConfigurator {
     """.trimIndent() + "\n"
 
     /**
-     * Official Ubuntu repositories ONLY (Ubuntu-first spec — no Debian).
-     * arm64/armhf guests live on ports.ubuntu.com (including the security
-     * pocket); amd64 (x86_64 app builds) uses archive.ubuntu.com +
-     * security.ubuntu.com. Signed-By points at the ubuntu-archive-keyring.gpg
-     * that ships inside the genuine ubuntu-base image (verified: the
-     * `ubuntu-keyring` package is installed there).
+     * Official Kali Linux repositories ONLY (Kali Linux-first spec — no Debian).
+     * arm64/armhf guests live on ports.kali.com (including the security
+     * pocket); amd64 (x86_64 app builds) uses archive.kali.com +
+     * security.kali.com. Signed-By points at the kali-archive-keyring.gpg
+     * that ships inside the genuine kali-base image (verified: the
+     * `kali-keyring` package is installed there).
      */
     private fun aptSources(useHttps: Boolean, arch: String = "arm64-v8a"): String {
         val scheme = if (useHttps) "https" else "http"
-        return if (arch == "x86_64") {
-            """
+        return """
             Types: deb
-            URIs: $scheme://${NoxsConstants.UBUNTU_ARCHIVE_HOST}/ubuntu
-            Suites: ${NoxsConstants.DEFAULT_UBUNTU_RELEASE} ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-updates ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-backports
-            Components: main restricted universe multiverse
-            Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-
-            Types: deb
-            URIs: $scheme://${NoxsConstants.UBUNTU_SECURITY_HOST}/ubuntu
-            Suites: ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-security
-            Components: main restricted universe multiverse
-            Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-            """.trimIndent() + "\n"
-        } else {
-            """
-            Types: deb
-            URIs: $scheme://${NoxsConstants.UBUNTU_PORTS_HOST}/ubuntu-ports
-            Suites: ${NoxsConstants.DEFAULT_UBUNTU_RELEASE} ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-updates ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-backports
-            Components: main restricted universe multiverse
-            Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-
-            Types: deb
-            URIs: $scheme://${NoxsConstants.UBUNTU_PORTS_HOST}/ubuntu-ports
-            Suites: ${NoxsConstants.DEFAULT_UBUNTU_RELEASE}-security
-            Components: main restricted universe multiverse
-            Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-            """.trimIndent() + "\n"
-        }
+            URIs: $scheme://${NoxsConstants.KALI_ARCHIVE_HOST}/kali
+            Suites: ${NoxsConstants.DEFAULT_KALI_RELEASE}
+            Components: main contrib non-free non-free-firmware
+            Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg
+        """.trimIndent() + "\n"
     }
 
     // ------------------------------------------------------------ templates
@@ -841,7 +819,7 @@ object RootfsConfigurator {
     private val NOXS_SU_WRAPPER = """
         #!/bin/sh
         # Noxs proot-compatible su implementation.
-        # Ubuntu's PAM su calls libaudit NETLINK_AUDIT which Android SELinux blocks with EACCES.
+        # Kali Linux's PAM su calls libaudit NETLINK_AUDIT which Android SELinux blocks with EACCES.
         SHELL_BIN="/bin/bash"
         LOGIN_SHELL=0
         CMD=""
@@ -989,7 +967,7 @@ object RootfsConfigurator {
 
     private val HELLO = """
         #!/bin/sh
-        echo "Noxs ${BuildConfig.VERSION_NAME} — Ubuntu 24.04 LTS userspace inside the Android app sandbox."
+        echo "Noxs ${BuildConfig.VERSION_NAME} — Kali Linux NetHunter Rootless userspace inside the Android app sandbox."
         echo "Security notice: 'sudo' here manages the Noxs environment ONLY."
         echo "It does not provide Android device root access."
     """.trimIndent()
@@ -1017,7 +995,7 @@ object RootfsConfigurator {
     internal fun ensureNoxsUser(
         rootfs: File,
         hostLabel: String = "android",
-        banner: String = "Noxs Ubuntu ${NoxsConstants.DEFAULT_UBUNTU_VERSION_ID} LTS (${NoxsConstants.DEFAULT_UBUNTU_RELEASE})",
+        banner: String = "Noxs Kali Linux ${NoxsConstants.DEFAULT_KALI_VERSION_ID} LTS (${NoxsConstants.DEFAULT_KALI_RELEASE})",
         hint: String = "apt update"
     ) {
         ensureNoxsUserAndBashrc(rootfs, hostLabel, banner, hint)
