@@ -49,8 +49,8 @@ class ProviderRegistryTest {
         val variants = KaliProvider().variants()
         assertEquals(listOf("kali-rootless"), variants.map { it.id })
         assertTrue(variants.single().isDefault)
-        // Pinned official cdimage kali-base 24.04.5 arm64 archive size.
-        assertEquals(29_936_675L, variants.single().downloadBytesEstimate)
+        // Conservative estimate for the official Kali NetHunter Rootless minimal archive.
+        assertEquals(125_829_120L, variants.single().downloadBytesEstimate)
         assertTrue(variants.single().extractedBytesEstimate > 0L)
     }
 
