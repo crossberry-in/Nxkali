@@ -1,12 +1,12 @@
 /*
  * Noxs — original implementation.
- * Builds and runs proot command lines that launch the Ubuntu 24.04 userspace.
+ * Builds and runs proot command lines that launch the Kali Linux userspace.
  *
  * Layering (docs/ARCHITECTURE.md):
  *   Android host → Noxs app sandbox (app-private storage) → Noxs runtime
- *   (proot + libnoxs-pty) → Ubuntu 24.04 LTS Noble userspace (noxs user)
+ *   (proot + libnoxs-pty) → Kali Linux (NetHunter Rootless) Noble userspace (noxs user)
  *
- * proot -0 fakes uid 0 via ptrace so Ubuntu tooling (apt, sudo, su, dpkg)
+ * proot -0 fakes uid 0 via ptrace so Kali Linux tooling (apt, sudo, su, dpkg)
  * behaves like on a real computer, entirely inside the app sandbox.
  */
 package com.crossberry.noxs.runtime
@@ -28,7 +28,7 @@ class ProotLauncher(private val paths: NoxsPaths, private val resources: NoxsRes
 
     /**
      * Builds the argv to launch a login shell (or one-shot [oneShotCmd]) inside
-     * the Ubuntu userspace. Pure function — unit tested.
+     * the Kali Linux userspace. Pure function — unit tested.
      */
     fun buildArgv(options: Options, oneShotCmd: List<String>? = null): List<String> {
         require(paths.prootBinary.isFile) { "proot binary is missing — run setup first" }
