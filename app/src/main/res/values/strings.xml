@@ -659,7 +659,7 @@
     <string name="kali_desktop_not_installed">Kali environment is not installed or KeX is unavailable.</string>
     <string name="kali_desktop_port_timeout">KeX did not open its local VNC port.</string>
     <string name="kali_desktop_connecting">Connecting to local Kali desktop…</string>
-    <string name="kali_desktop_connected">Connected to Kali desktop (%1$1d × %2$2d)</string>
+    <string name="kali_desktop_connected">Connected to Kali desktop (%1$d × %2$d)</string>
     <string name="kali_desktop_disconnected">Kali desktop disconnected.</string>
     <string name="kali_desktop_stopping">Stopping Kali KeX…</string>
     <string name="kali_desktop_stopped">Kali KeX stopped.</string>
