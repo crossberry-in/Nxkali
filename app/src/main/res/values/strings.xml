@@ -645,4 +645,24 @@
     <string name="editor_open_terminal_failed">Could not create a terminal session here: %1$s</string>
     <string name="editor_session_created">Terminal opened at %1$s</string>
     <string name="editor_workspace_missing">Workspace folder not found — opening /home/noxs</string>
+
+    <string name="welcome_kali_desktop">Kali Desktop</string>
+    <string name="title_kali_desktop">Kali KeX Desktop</string>
+    <string name="kali_desktop_hint">Run kex passwd once in the Kali terminal, then enter that password here to open the local desktop.</string>
+    <string name="kali_desktop_password_hint">KeX password</string>
+    <string name="kali_desktop_connect">Connect</string>
+    <string name="kali_desktop_stop">Stop</string>
+    <string name="kali_desktop_input_hint">Type to Kali desktop</string>
+    <string name="kali_desktop_send">Send</string>
+    <string name="kali_desktop_starting">Starting Kali KeX locally…</string>
+    <string name="kali_desktop_start_failed">Could not start Kali KeX</string>
+    <string name="kali_desktop_not_installed">Kali environment is not installed or KeX is unavailable.</string>
+    <string name="kali_desktop_port_timeout">KeX did not open its local VNC port.</string>
+    <string name="kali_desktop_connecting">Connecting to local Kali desktop…</string>
+    <string name="kali_desktop_connected">Connected to Kali desktop (%1$1d × %2$2d)</string>
+    <string name="kali_desktop_disconnected">Kali desktop disconnected.</string>
+    <string name="kali_desktop_stopping">Stopping Kali KeX…</string>
+    <string name="kali_desktop_stopped">Kali KeX stopped.</string>
+    <string name="kali_desktop_stop_failed">Could not stop Kali KeX.</string>
+
 </resources>
