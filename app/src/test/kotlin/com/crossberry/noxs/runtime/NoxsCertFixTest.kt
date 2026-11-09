@@ -83,7 +83,7 @@ class NoxsCertFixTest {
 
     @Test
     fun `cert-fix installs the certificate stack and the fetch tools`() {
-        assertTrue(certFix.contains("ca-certificates ubuntu-keyring curl wget"))
+        assertTrue(certFix.contains("ca-certificates kali-archive-keyring curl wget"))
         assertTrue(certFix.contains("update-ca-certificates --fresh"))
         assertTrue(certFix.contains("/etc/ssl/certs/ca-certificates.crt"))
     }
@@ -142,8 +142,8 @@ class NoxsCertFixTest {
     fun `cert-fix self-heals a missing noxs sources file`() {
         assertTrue(certFix.contains("recreating the canonical Noxs sources"))
         assertTrue(certFix.contains("cf_write_sources"))
-        assertTrue(certFix.contains("Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg"))
-        assertTrue(certFix.contains("Suites: noble-security"))
+        assertTrue(certFix.contains("Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg"))
+        assertTrue(certFix.contains("Suites: kali-rolling-security"))
     }
 
     @Test
