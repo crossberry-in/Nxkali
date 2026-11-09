@@ -143,7 +143,7 @@ class NoxsCertFixTest {
         assertTrue(certFix.contains("recreating the canonical Noxs sources"))
         assertTrue(certFix.contains("cf_write_sources"))
         assertTrue(certFix.contains("Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg"))
-        assertTrue(certFix.contains("Suites: kali-rolling-security"))
+        assertTrue(certFix.contains("Suites: kali-rolling"))
     }
 
     @Test
