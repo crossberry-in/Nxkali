@@ -82,7 +82,7 @@ class NoxsService : Service() {
         // Security bootstrap (APT/CA/TLS repair) runs here in the service
         // background: it must never gate shell creation. The terminal always
         // clears straight to an active shell while this runs. Only apt-family
-        // environments get the Ubuntu APT bootstrap (spec §62 — no hard-coded
+        // environments get the Kali Linux APT bootstrap (spec §62 — no hard-coded
         // distro backend).
         resources = NoxsResources(paths)
         launcher = ProotLauncher(paths, resources)
