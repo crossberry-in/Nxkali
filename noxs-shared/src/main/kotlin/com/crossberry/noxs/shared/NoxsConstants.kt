@@ -18,16 +18,13 @@ object NoxsConstants {
     const val DEFAULT_ROOT_HOME = "/root"
     const val DEFAULT_SHELL = "/bin/bash"
 
-    /** Default root filesystem release bootstrapped by Noxs (Ubuntu-first). */
-    const val DEFAULT_UBUNTU_RELEASE = "noble"
-    const val DEFAULT_UBUNTU_VERSION_ID = "24.04"
-    const val DEFAULT_UBUNTU_CODENAME = "Noble Numbat"
+    /** Official Kali NetHunter Rootless rolling userspace. */
+    const val DEFAULT_KALI_RELEASE = "kali-rolling"
+    const val DEFAULT_KALI_VERSION_ID = "rolling"
+    const val DEFAULT_KALI_CODENAME = "Kali Rolling"
 
-    /** Ubuntu APT repository hosts. arm64/armhf live on the ports mirror;
-     *  amd64 (x86_64 app builds / emulators) uses the main archive. */
-    const val UBUNTU_PORTS_HOST = "ports.ubuntu.com"
-    const val UBUNTU_ARCHIVE_HOST = "archive.ubuntu.com"
-    const val UBUNTU_SECURITY_HOST = "security.ubuntu.com"
+    /** Official Kali rolling repository host (same endpoint for all ABIs). */
+    const val KALI_ARCHIVE_HOST = "http.kali.org"
 
     /** Runtime state directories inside the rootfs (FHS). */
     const val RUN_DIR = "/run"
