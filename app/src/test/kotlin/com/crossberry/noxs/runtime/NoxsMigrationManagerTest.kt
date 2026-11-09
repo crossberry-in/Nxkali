@@ -48,7 +48,7 @@ class NoxsMigrationManagerTest {
     }
 
     @Test fun `unknown suite without distro key stays unsupported`() {
-        assertEquals("ubuntu", NoxsMigrationManager.classifyInstall(
+        assertEquals("unknown", NoxsMigrationManager.classifyInstall(
             marker("installed=1\nsuite=noble\n")
         ))
     }
