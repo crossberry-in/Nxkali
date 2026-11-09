@@ -29,7 +29,7 @@ import com.crossberry.noxs.environments.model.EnvironmentVariant
  * downloads, TarGuard extraction, signed APT bootstrap) against the official
  * Kali NetHunter Rootless minimal rootfs artifact, then configures the official
  * Kali rolling repository (http.kali.org/kali for all architectures)
- * and the `noxs@kali:~/*
+ * and the `noxs@kali:~` terminal identity.
  * Noxs — original implementation.
  * Builtin environment providers (spec §2-§8 of the Kali Linux-first spec).
  *
