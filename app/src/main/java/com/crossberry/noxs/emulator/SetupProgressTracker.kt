@@ -5,7 +5,7 @@
  * Turns raw `apt-get update` / `apt-get install` output into a single
  * monotonic 0..100 percent plus a coarse sub-phase, so the emulator window
  * can show "47% · Downloading packages…" and a live log while the QEMU
- * runtime is provisioned into the Ubuntu rootfs.
+ * runtime is provisioned into the Kali Linux rootfs.
  *
  * Stage weight map (percent windows):
  *   PREPARE  → 0..2     (VM storage dirs)
@@ -103,7 +103,7 @@ class SetupProgressTracker {
     private fun onUpdateLine(line: String) {
         if (line.startsWith("Get:") || line.startsWith("Hit:")) {
             indexFetches++
-            // noble arm64 refreshes roughly two dozen index files; each
+            // kali-rolling arm64 refreshes roughly two dozen index files; each
             // fetch advances a fraction of the 8..28 window.
             val sub = (indexFetches * INDEX_WINDOW) / INDEX_NOMINAL
             percent = maxOf(percent, UPDATE_FLOOR + sub.coerceAtMost(INDEX_WINDOW))
