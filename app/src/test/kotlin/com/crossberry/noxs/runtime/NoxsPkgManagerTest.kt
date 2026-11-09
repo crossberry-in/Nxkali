@@ -11,8 +11,8 @@ import org.junit.rules.TemporaryFolder
 
 /**
  * `nx pkg` Package Manager invariants: the distro-aware front end must
- * ship with the package system (migration version 14), route every
- * Debian/Ubuntu install through the NATIVE apt engine with the signed
+ * ship with the package system (migration version 14), route supported
+ * Kali/Debian installs through the NATIVE apt engine with the signed
  * trust chain intact (print-uris hashes verified, never bypassed), use
  * the Noxs mirror only as an accelerator with an official fallback, and
  * expose stable error codes + single-line progress UI.
@@ -132,7 +132,7 @@ class NoxsPkgManagerTest {
         assertTrue(pkgManager.contains("pkgm_search_cmd"))
         assertTrue("local cache source tag", pkgManager.contains("local-cache"))
         assertTrue("Noxs API source tag", pkgManager.contains("noxs-mirror"))
-        assertTrue("distro metadata source tag", pkgManager.contains("ubuntu-official"))
+        assertTrue("distro metadata source tag", pkgManager.contains("kali-official"))
         assertTrue("registry source tag", pkgManager.contains("noxs-registry"))
         assertTrue(pkgManager.contains("PACKAGE_NOT_FOUND"))
         assertTrue("mirror index is cached with a TTL", pkgManager.contains("NOXS_PKG_CACHE_TTL"))
@@ -167,9 +167,12 @@ class NoxsPkgManagerTest {
     }
 
     @Test
-    fun `os detection covers debian and ubuntu without hardcoded paths`() {
-        assertTrue(pkgManager.contains("ID_LIKE"))
+    fun `os detection supports kali and legacy debian only`() {
         assertTrue(pkgManager.contains("NOXS_OS_RELEASE"))
+        assertTrue(pkgManager.contains("kali) PKG_OS=\\"kali\\""))
+        assertTrue(pkgManager.contains("debian) PKG_OS=\\"debian\\""))
+        assertTrue(pkgManager.contains("Ubuntu is not a guest target"))
+        assertFalse("Ubuntu must not be detected as a supported distro", pkgManager.contains("ubuntu) PKG_OS="))
         assertTrue("apt-get preferred when present", pkgManager.indexOf("apt-get") < pkgManager.indexOf("elif command -v apt "))
     }
 }
