@@ -2,11 +2,11 @@
   "schema": 1,
   "arch": "arm64-v8a",
   "rootfs": {
-    "url": "https://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04.5-base-arm64.tar.gz",
-    "sha256": "a91d5a93010193712d346d761372b7c9db6dfcf093893161c64ca107f05914f2",
-    "format": "tar.gz",
-    "sizeBytes": 29936675
+    "url": "https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-minimal-arm64.tar.xz",
+    "sha256": "d6403a5da175df325611d23af4b92330856059c45454eced7f4cdf3ca6df2e4e",
+    "format": "tar.xz",
+    "sizeBytes": 125829120
   },
-  "generatedAt": "2026-11-07T01:55:00Z",
-  "source": "scripts/build-rootfs.sh"
+  "generatedAt": "2026-10-25T22:56:00Z",
+  "source": "Kali NetHunter Rootless official minimal rootfs"
 }
