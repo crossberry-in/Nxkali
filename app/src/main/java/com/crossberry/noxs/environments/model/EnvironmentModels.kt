@@ -110,7 +110,7 @@ data class TerminalProfile(
     val home: String,
     val workingDirectory: String,
     val environmentVariables: Map<String, String>,
-    /** Prompt host label (noxs@ubuntu for the Noxs environment — spec §4). */
+    /** Prompt host label (noxs@kali for the Noxs environment — spec §4). */
     val promptHost: String
 )
 
