@@ -57,6 +57,13 @@
             android:label="@string/title_activity_center" />
 
         <activity
+            android:name=".ui.KaliDesktopActivity"
+            android:exported="false"
+            android:label="@string/title_kali_desktop"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".emulator.EmulatorActivity"
             android:exported="false"
             android:label="@string/title_emulator"
