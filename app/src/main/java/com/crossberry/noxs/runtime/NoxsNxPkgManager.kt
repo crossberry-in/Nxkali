@@ -3,7 +3,7 @@
  * pkg-manager.sh — `nx pkg search|info|install|update|list|remove|doctor`.
  *
  * A distro-aware package manager front end for Noxs:
- *   - Ubuntu / Debian-family guests: dependency resolution, download and actual
+ *   - Kali Linux / Debian-family guests: dependency resolution, download and actual
  *     installation stay inside the NATIVE APT engine (apt / apt-get).
  *     Repository metadata is the signed apt index; per-file SHA-256 values
  *     parsed from `apt-get --print-uris` come from that signed metadata,
@@ -81,7 +81,7 @@ pkgm_rc() { # CODE -> numeric exit code
 
 # --------------------------------------------------------- OS / PM detect
 
-pkgm_detect_os() { # sets PKG_OS (debian|ubuntu|unknown), PKG_PM (apt-get|apt|"")
+pkgm_detect_os() { # sets PKG_OS (debian|kali|unknown), PKG_PM (apt-get|apt|"")
     PKG_OS="unknown"; PKG_PM=""
     if [ -f "§PKG_OS_RELEASE" ]; then
         local id like
@@ -89,10 +89,10 @@ pkgm_detect_os() { # sets PKG_OS (debian|ubuntu|unknown), PKG_PM (apt-get|apt|""
         like=§(sed -n 's/^ID_LIKE=//p' "§PKG_OS_RELEASE" | tr -d '"')
         case "§id" in
             debian) PKG_OS="debian" ;;
-            ubuntu) PKG_OS="ubuntu" ;;
+            kali) PKG_OS="kali" ;;
             *) case "§like" in
                    *debian*)  PKG_OS="debian" ;;
-                   *ubuntu*)  PKG_OS="ubuntu" ;;
+                   *kali*)  PKG_OS="kali" ;;
                esac ;;
         esac
     fi
@@ -103,7 +103,7 @@ pkgm_detect_os() { # sets PKG_OS (debian|ubuntu|unknown), PKG_PM (apt-get|apt|""
 }
 
 pkgm_is_distro() { # true when a Debian-family PM actually drives this guest
-    [ "§PKG_OS" = "debian" ] || [ "§PKG_OS" = "ubuntu" ]
+    [ "§PKG_OS" = "debian" ] || [ "§PKG_OS" = "kali" ]
     [ "§PKG_PM" != "" ] && return 0
     return 1
 }
@@ -401,10 +401,10 @@ pkgm_search_cmd() {
             version=§(apt-cache policy "§name" 2>/dev/null | awk '/Candidate:/{print §2; exit}')
             if [ "§{NOXS_PKG_JSON:-0}" = "1" ]; then
                 [ "§printed" -gt 0 ] && printf ','
-                printf '{"name":"%s","source":"ubuntu-official","version":"%s"}\n' "§name" "§version"
+                printf '{"name":"%s","source":"kali-official","version":"%s"}\n' "§name" "§version"
             else
                 [ "§printed" -eq 0 ] && printf '%-22s %-16s %-24s %-8s %s\n' "NAME" "SOURCE" "VERSION" "ARCH" "DESCRIPTION"
-                printf '%-22s %-16s %-24s %-8s %s\n' "§name" "ubuntu-official" "§version" "§arch_now" "§desc"
+                printf '%-22s %-16s %-24s %-8s %s\n' "§name" "kali-official" "§version" "§arch_now" "§desc"
             fi
             printed=§((printed + 1))
         done <<EOF
@@ -465,7 +465,7 @@ pkgm_info_cmd() {
     fi
     if pkgm_detect_os && pkgm_is_distro && [ "§src" = "unknown" ]; then
         if apt-cache show "§name" >/dev/null 2>&1; then
-            src="ubuntu-official"
+            src="kali-official"
             ver=§(apt-cache policy "§name" 2>/dev/null | awk '/Candidate:/{print §2; exit}')
         fi
     fi
@@ -533,7 +533,7 @@ pkgm_install_cmd() {
     if [ -z "§src" ]; then
         pkgm_detect_os
         if pkgm_is_distro && apt-cache show "§name" >/dev/null 2>&1; then
-            src="ubuntu-official"
+            src="kali-official"
             ver=§(apt-cache policy "§name" 2>/dev/null | awk '/Candidate:/{print §2; exit}')
         fi
     fi
@@ -738,7 +738,7 @@ EOF
         return "§(pkgm_rc DEPENDENCY_RESOLUTION_FAILED)"
     fi
 
-    local src_note="official Ubuntu repositories"
+    local src_note="official Kali Linux repositories"
     [ "§from_mirror" -gt 0 ] && src_note="Noxs mirror (§from_mirror file(s)) + official fallback"
     [ "§hits" -gt 0 ] && [ "§from_mirror" -eq 0 ] && src_note="sha256-keyed cache (§hits hit(s))"
     ui_result OK "§name §ver §arch — §n package(s) installed via §src_note"
@@ -881,36 +881,36 @@ pkgm_doctor_cmd() {
         say "PASS  OS: §PKG_OS (no native apt — Noxs packages only)"
     fi
     if pkgm_is_distro; then
-        # Ubuntu-first identity + repository validation (Ubuntu-first spec §6).
+        # Kali Linux-first identity + repository validation (Kali Linux-first spec §6).
         # Paths are env-overridable so the functional tests can run against
         # fixture files without touching a real installation.
         local noxs_sources="§{NOXS_APT_SOURCES:-/etc/apt/sources.list.d/noxs.sources}"
-        local ubuntu_keyring="§{NOXS_KEYRING:-/usr/share/keyrings/ubuntu-archive-keyring.gpg}"
-        if grep -qi '^ID=ubuntu' "§PKG_OS_RELEASE" 2>/dev/null; then
-            say "PASS  Ubuntu identity (os-release ID=ubuntu)"
+        local kali_keyring="§{NOXS_KEYRING:-/usr/share/keyrings/kali-archive-keyring.gpg}"
+        if grep -qi '^ID=kali' "§PKG_OS_RELEASE" 2>/dev/null; then
+            say "PASS  Kali Linux identity (os-release ID=kali)"
         else
-            say "FAIL  os-release is not Ubuntu — Noxs ships Ubuntu 24.04 LTS only"
+            say "FAIL  os-release is not Kali Linux — Noxs ships Kali Linux (NetHunter Rootless) only"
             fails=§((fails + 1))
         fi
         local src_host
         src_host=§(sed -n 's/^URIs://p' "§{noxs_sources}" 2>/dev/null | head -n 1 | sed 's|.*://||; s|/.*||')
         case "§src_host" in
-            ports.ubuntu.com|archive.ubuntu.com)
-                say "PASS  Ubuntu repositories (§src_host)"
+            ports.kali.com|archive.kali.com)
+                say "PASS  Kali Linux repositories (§src_host)"
                 ;;
             "")
                 say "FAIL  APT sources missing — run: nx cert-fix"
                 fails=§((fails + 1))
                 ;;
             *)
-                say "FAIL  unexpected APT host §src_host (expected ports.ubuntu.com)"
+                say "FAIL  unexpected APT host §src_host (expected ports.kali.com)"
                 fails=§((fails + 1))
                 ;;
         esac
-        if [ -r "§ubuntu_keyring" ]; then
-            say "PASS  Ubuntu archive keyring present"
+        if [ -r "§kali_keyring" ]; then
+            say "PASS  Kali Linux archive keyring present"
         else
-            say "FAIL  ubuntu-archive-keyring.gpg missing — run: nx cert-fix"
+            say "FAIL  kali-archive-keyring.gpg missing — run: nx cert-fix"
             fails=§((fails + 1))
         fi
         if dpkg --print-architecture >/dev/null 2>&1; then
