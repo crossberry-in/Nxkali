@@ -52,16 +52,17 @@ object NoxsMigrationManager {
         val value = { key: String ->
             lines.firstOrNull { it.startsWith("$key=") }?.substringAfter('=')?.trim()
         }
-        // distro=kali wins; an explicit suite=bookworm or a missing distro
-        // key with any suite is legacy Debian.
+        // Only genuine Kali and known legacy Debian markers are supported.
+        // Do not silently classify Ubuntu (or an unknown suite) as Debian.
         when (value("distro")) {
             "kali" -> return "kali"
             "debian" -> return "debian"
+            "ubuntu" -> return "unknown"
         }
         return when (value("suite")) {
-            null -> "unknown"
             "kali-rolling" -> "kali"
-            else -> "debian"
+            "bookworm" -> "debian"
+            else -> "unknown"
         }
     }
 
