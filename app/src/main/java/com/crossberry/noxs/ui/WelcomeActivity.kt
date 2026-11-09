@@ -31,6 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
         val ready = app.environments.environments.value.any { it.status == EnvironmentStatus.READY }
 
         binding.btnTerminal.isEnabled = ready
+        binding.btnKaliDesktop.isEnabled = ready
         binding.btnSetup.text = getString(
             if (ready) R.string.nav_settings else R.string.welcome_setup
         )
@@ -44,6 +45,9 @@ class WelcomeActivity : AppCompatActivity() {
                     if (ready) SettingsActivity::class.java else SetupActivity::class.java
                 )
             )
+        }
+        binding.btnKaliDesktop.setOnClickListener {
+            startActivity(Intent(this, KaliDesktopActivity::class.java))
         }
         binding.btnTerminal.setOnClickListener {
             if (permissionOnboardingPending()) {
