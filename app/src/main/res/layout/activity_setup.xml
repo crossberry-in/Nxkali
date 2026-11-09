@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Noxs setup console: the REAL terminal is the setup screen. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/noxs_background"
+    android:orientation="vertical">
+
+    <!-- Slim terminal toolbar: tiny status indicator + stop action -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/noxs_surface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="9dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="9dp">
+
+        <TextView
+            android:id="@+id/tv_setup_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+            android:text="@string/setup_status_idle"
+            android:textColor="@color/noxs_text"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_setup_elapsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text=""
+            android:textColor="@color/noxs_text_dim"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="monospace"
+            android:padding="8dp"
+            android:text="@string/setup_action_stop"
+            android:textColor="@color/noxs_status_err"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Full-viewport real terminal -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.crossberry.noxs.terminal.view.TerminalView
+            android:id="@+id/terminal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_latest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="12dp"
+            android:background="@color/noxs_surface"
+            android:fontFamily="monospace"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="@string/terminal_latest"
+            android:textColor="@color/noxs_primary"
+            android:textSize="12sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Terminal-style masked password input (passwd-style prompt) -->
+    <LinearLayout
+        android:id="@+id/password_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/noxs_surface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="6dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_password_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/setup_password_enter"
+            android:textColor="@color/noxs_status_ok"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="monospace"
+            android:importantForAutofill="no"
+            android:imeOptions="actionDone|flagNoFullscreen"
+            android:inputType="textPassword|textNoSuggestions"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="8dp"
+            android:saveEnabled="false"
+            android:textColor="@color/noxs_text"
+            android:textColorHint="@color/noxs_surface_alt"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_password_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="monospace"
+            android:padding="10dp"
+            android:text="@string/setup_action_send"
+            android:textColor="@color/noxs_status_ok"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Small failure actions (only after FAILURE/STOP) -->
+    <LinearLayout
+        android:id="@+id/actions_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/noxs_surface"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/btn_retry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/setup_action_retry"
+            android:textColor="@color/noxs_status_ok"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_open_shell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/setup_action_open_shell"
+            android:textColor="@color/noxs_text"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_repair"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/setup_action_repair"
+            android:textColor="@color/noxs_status_warn"
+            android:textSize="13sp" />
+    </LinearLayout>
+</LinearLayout>

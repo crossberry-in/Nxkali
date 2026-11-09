@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "arch": "armeabi-v7a",
+  "rootfs": {
+    "url": "https://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04.5-base-armhf.tar.gz",
+    "sha256": "4fcee4d278f1c5232e085a021a85e4c6cef3853557a88d98ff380b5e5d5841bb",
+    "format": "tar.gz",
+    "sizeBytes": 27120839
+  },
+  "generatedAt": "2026-11-07T01:55:00Z",
+  "source": "scripts/build-rootfs.sh"
+}

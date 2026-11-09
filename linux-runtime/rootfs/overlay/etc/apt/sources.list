@@ -1,0 +1,15 @@
+# /etc/apt/sources.list — Noxs sandbox (Ubuntu 24.04 LTS noble, canonical copy)
+# NOTE: the app installs the FINAL definition as
+# /etc/apt/sources.list.d/noxs.sources (deb822). arm64/armhf use the ports
+# mirror; this reference file documents the arm64 (default) repositories.
+Types: deb
+URIs: https://ports.ubuntu.com/ubuntu-ports
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+URIs: https://ports.ubuntu.com/ubuntu-ports
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg

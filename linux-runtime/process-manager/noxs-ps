@@ -1,0 +1,8 @@
+#!/bin/sh
+# shellcheck disable=SC1090,SC1091,SC2012,SC2034,SC2086,SC2164,SC2295
+# noxs-ps — process listing for the Noxs userspace (original).
+# Wraps procps ps; app-side screens parse the same format.
+# Usage: noxs-ps [count]
+
+COUNT="${1:-50}"
+ps -eo pid,ppid,user,%cpu,%mem,stat,etime,comm,args --sort=-%cpu 2>/dev/null | head -n "$COUNT"

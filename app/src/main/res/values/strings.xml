@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Noxs strings (original) -->
+<resources>
+    <string name="app_name">Noxs</string>
+    <string name="app_tagline">Set up your Linux environment</string>
+
+    <!-- Welcome -->
+    <string name="welcome_setup">Set up your Linux environment</string>
+    <string name="welcome_open_terminal">Open terminal</string>
+    <string name="welcome_disclaimer">Your Linux environment stays within Noxs. Start when you’re ready.</string>
+
+    <!-- Setup -->
+    <string name="title_setup">Noxs</string>
+    <string name="setup_subtitle">Set up your Linux environment</string>
+    <string name="setup_password_title">The password is for your Noxs Linux environment.</string>
+    <string name="setup_password_hint">Password</string>
+    <string name="setup_password2_hint">Confirm password</string>
+    <string name="setup_password_min_length">Use at least 4 characters.</string>
+    <string name="setup_password_mismatch">Passwords do not match</string>
+    <string name="setup_password_invalid">Avoid colons and control characters.</string>
+    <string name="setup_start">Continue</string>
+    <string name="setup_retry">Try again</string>
+    <string name="setup_progress_title">Setup progress</string>
+    <string name="setup_failed_generic">Setup couldn’t finish. Check your connection and try again.</string>
+    <string name="setup_step_arch">Detecting architecture</string>
+    <string name="setup_step_storage">Initializing secure storage</string>
+    <string name="setup_step_manifest">Loading bootstrap manifest</string>
+    <string name="setup_step_proot">Acquiring proot runtime</string>
+    <string name="setup_step_rootfs">Acquiring the Ubuntu 24.04 LTS root filesystem</string>
+    <string name="setup_step_extract">Extracting root filesystem (path-traversal protected)</string>
+    <string name="setup_step_configure">Configuring the Ubuntu userspace</string>
+    <string name="setup_step_user">Creating noxs user</string>
+    <string name="setup_step_run">Initializing /run and /var/run</string>
+    <string name="setup_step_apt">Repairing dpkg and verifying Ubuntu HTTPS certificates</string>
+    <string name="setup_step_shell">Preparing first shell</string>
+    <string name="setup_done">Noxs is ready</string>
+    <string name="setup_done_msg">Your Linux environment is ready.</string>
+    <string name="setup_open_terminal">Open terminal</string>
+    <string name="apt_background_failed">APT security setup will retry on the next launch. %1$s</string>
+
+    <!-- Setup console: the real terminal IS the setup screen -->
+    <string name="setup_status_idle">● NOXS SETUP</string>
+    <string name="setup_status_awaiting">● AWAITING PASSWORD</string>
+    <string name="setup_status_running">● SETUP RUNNING</string>
+    <string name="setup_status_completed">✓ SETUP COMPLETE</string>
+    <string name="setup_status_failed">✕ SETUP FAILED</string>
+    <string name="setup_status_repairing">● REPAIRING</string>
+    <string name="setup_status_cancelled">■ SETUP STOPPED</string>
+    <string name="setup_action_stop">■ Stop</string>
+    <string name="setup_action_retry">Retry</string>
+    <string name="setup_action_open_shell">Open Shell</string>
+    <string name="setup_action_repair">Repair</string>
+    <string name="setup_action_send">Enter</string>
+    <string name="setup_password_enter">Password:</string>
+    <string name="setup_password_confirm">Confirm:</string>
+    <string name="setup_stop_title">Stop setup?</string>
+    <string name="setup_stop_msg">The active setup process will be stopped. Verified partial downloads are kept and you can retry later.</string>
+    <string name="setup_back_title">Setup is still running</string>
+    <string name="setup_back_msg">Noxs keeps setting up in the background. You can return anytime.</string>
+
+    <!-- Terminal -->
+    <string name="title_terminal">Terminal</string>
+    <string name="terminal_latest">↓ Latest</string>
+    <string name="drawer_sessions">Sessions</string>
+    <string name="drawer_new_session">New session</string>
+    <string name="drawer_new_root_session">New root session (sandbox)</string>
+    <string name="drawer_close_session">Close current session</string>
+    <string name="nav_packages">Packages</string>
+    <string name="nav_files">Files</string>
+    <string name="nav_users">Users</string>
+    <string name="nav_processes">Processes</string>
+    <string name="nav_services">Services</string>
+    <string name="nav_env">Environment</string>
+    <string name="nav_storage">Storage</string>
+    <string name="nav_security">Security</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_diagnostics">Diagnostics</string>
+    <string name="nav_about">About Noxs</string>
+    <string name="status_cpu">CPU %1$s%%</string>
+    <string name="status_mem">MEM %1$s/%2$s MB</string>
+    <string name="status_storage">ROOTFS %1$s MB</string>
+    <string name="status_sandbox">sandbox</string>
+    <string name="copied">Copied</string>
+    <string name="no_sessions">No active sessions</string>
+    <string name="session_finished_toast">%1$s exited (code %2$d). Tap + Shell for a new session.</string>
+    <string name="action_menu">☰ Menu</string>
+    <string name="action_new_shell">+ Shell</string>
+    <string name="action_new_root"># Root</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_paste">Paste</string>
+    <string name="action_copy">Copy</string>
+
+    <!-- Generic -->
+    <string name="action_refresh">Refresh</string>
+    <string name="action_close">Close</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_search">Search</string>
+    <string name="action_install">Install</string>
+    <string name="action_create">Create</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_navigate_back">Back</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="err_generic">Something went wrong. See Diagnostics for details.</string>
+    <string name="err_storage">Unable to initialize app storage.</string>
+    <string name="err_storage_space">Not enough free storage. Noxs needs about 1 GB free to install — free up space and try again.</string>
+    <string name="err_network">Couldn’t reach the download servers. Check your internet connection (try Wi-Fi or mobile data) and tap Try again.</string>
+    <string name="err_bootstrap_corrupt">The downloaded files were corrupted and could not be verified. Tap Try again — the download restarts fresh.</string>
+    <string name="err_bootstrap">Unable to start Linux environment. Check your connection and retry.</string>
+    <string name="err_bootstrap_verify">Bootstrap verification failed. The download could not be verified.</string>
+    <string name="err_package_install">Package installation failed. See the terminal output.</string>
+    <string name="err_permission_denied">Permission denied.</string>
+    <string name="err_capability">Required capability is unavailable on this Android device.</string>
+    <string name="err_not_installed">The Linux environment is not set up yet.</string>
+    <string name="confirm_reset_title">Reset Linux environment?</string>
+    <string name="confirm_reset_msg">This deletes the Noxs Ubuntu root filesystem, including /home/noxs. You will need to run setup again. It does not modify Android folders selected through SAF.</string>
+
+    <!-- Package manager -->
+    <string name="title_package_manager">Packages</string>
+    <string name="pkg_search_hint">Search packages (apt-cache)</string>
+    <string name="pkg_installed">Installed</string>
+    <string name="pkg_update_lists">Run apt update</string>
+    <string name="pkg_install_hint">Install runs in a terminal session with sudo.</string>
+
+    <!-- Files -->
+    <string name="title_file_browser">Files</string>
+    <string name="files_root_label">Noxs rootfs</string>
+    <string name="files_empty">Empty directory</string>
+
+    <!-- Users -->
+    <string name="title_user_manager">Users</string>
+    <string name="users_new_name">New username</string>
+    <string name="users_create">Create user</string>
+    <string name="users_set_password">Set password</string>
+    <string name="users_noxs_protected">The noxs user cannot be deleted.</string>
+    <string name="users_home">Home</string>
+
+    <!-- Processes -->
+    <string name="title_process_manager">Processes</string>
+    <string name="proc_kill">Kill</string>
+    <string name="proc_kill_confirm">Kill process %1$d?</string>
+
+    <!-- Services -->
+    <string name="title_service_manager">Services</string>
+    <string name="svc_start">Start</string>
+    <string name="svc_stop">Stop</string>
+    <string name="svc_restart">Restart</string>
+    <string name="svc_none">No services defined in /etc/noxs/services/</string>
+    <string name="svc_code_title">code-server (VS Code in browser)</string>
+    <string name="svc_code_action">noxs code status</string>
+
+    <!-- Env -->
+    <string name="title_env_vars">Environment variables</string>
+    <string name="env_key_hint">KEY</string>
+    <string name="env_value_hint">value</string>
+    <string name="env_add">Set variable</string>
+    <string name="env_scope">/etc/environment — applies to new sessions</string>
+
+    <!-- Storage -->
+    <string name="title_storage">Storage</string>
+    <string name="storage_rootfs">Root filesystem</string>
+    <string name="storage_apt_cache">APT package cache</string>
+    <string name="storage_open_noxs_files">Open Noxs Linux Home in Files</string>
+    <string name="storage_open_noxs_files_desc">Browse and edit guest files with Android\'s document picker (read/write)</string>
+    <string name="storage_logs">App logs</string>
+    <string name="storage_clear_cache">Clear APT cache</string>
+    <string name="storage_reset">Reset Linux environment</string>
+    <string name="storage_warn_exceeded">Storage usage exceeds the configured warning threshold.</string>
+
+    <!-- Security -->
+    <string name="title_security">Security &amp; sandbox</string>
+    <string name="security_notice">Noxs runs inside the Android application sandbox. It does not modify the Android system, does not bypass SELinux, and sudo grants privileges only within the Noxs environment.</string>
+
+    <!-- Settings -->
+    <string name="title_settings">Settings</string>
+    <string name="settings_font_size">Font size</string>
+    <string name="settings_scrollback">Scrollback lines</string>
+    <string name="settings_extra_keys">Show extra keys row</string>
+    <string name="settings_volume_keys">Volume keys as arrows</string>
+    <string name="settings_bell">Audible bell</string>
+    <string name="settings_section_background">Background</string>
+    <string name="settings_keep_awake">Keep CPU awake while running (servers stay reachable outside Noxs)</string>
+    <string name="settings_max_sessions">Session quota</string>
+    <string name="settings_max_procs">Process quota per session</string>
+    <string name="settings_storage_warn">Storage warning threshold (MB)</string>
+    <string name="settings_rootfs_url">Custom rootfs URL (https, optional)</string>
+    <string name="settings_dns">DNS servers (one per line)</string>
+    <string name="settings_saved">Settings saved</string>
+
+    <!-- Diagnostics -->
+    <string name="title_diagnostics">Diagnostics (developer)</string>
+    <string name="diag_copy">Copy logs</string>
+    <string name="diag_clear">Clear</string>
+
+    <!-- About -->
+    <string name="title_about">About Noxs</string>
+    <string name="about_body">Noxs by CrossberryWeb.\n\nFor help, feedback, or support:\nWebsite: https://crossberry.vercel.app\nEmail: crossberryweb@gmail.com</string>
+    <string name="about_licenses">Open-source software:\n\u2022 Editor: code-server (MIT) \u2014 github.com/coder/code-server\n\u2022 Editor runtime: Visual Studio Code (MIT) \u2014 github.com/microsoft/vscode\n\u2022 Both are downloaded at install time into the Noxs guest and never bundled with the APK</string>
+    <string name="about_version">Version %1$s</string>
+
+    <!-- Notifications -->
+    <string name="notif_short_title">Noxs</string>
+    <string name="notif_running_one">● Running: %1$s</string>
+    <string name="notif_running_many">● Running: %1$s (+%2$d more)</string>
+    <string name="notif_title">Noxs Linux environment</string>
+    <string name="notif_sessions">%1$d terminal session(s) running</string>
+    <string name="notif_idle">Linux environment running</string>
+    <string name="channel_runtime">Noxs runtime</string>
+    <string name="channel_activity">Noxs Activity</string>
+
+    <!-- Session manager (drawer list) -->
+    <string name="session_close">Close</string>
+    <string name="session_root_badge">ROOT</string>
+
+    <!-- Background Activity Center -->
+    <string name="title_activity_center">Noxs Activity</string>
+    <string name="activity_open">Open</string>
+    <string name="activity_stop">Stop</string>
+    <string name="activity_stop_noxs">Stop Noxs</string>
+    <string name="activity_clear_finished">Clear finished</string>
+    <string name="activity_section_running">RUNNING</string>
+    <string name="activity_section_completed">COMPLETED</string>
+    <string name="activity_section_failed">FAILED</string>
+    <string name="activity_section_stopped">STOPPED</string>
+    <string name="activity_none">No background activity. Start a command in the terminal.</string>
+    <string name="activity_status_starting">● Starting…</string>
+    <string name="activity_status_running">● Running…</string>
+    <string name="activity_status_completed">✓ Completed</string>
+    <string name="activity_status_failed">✕ Failed</string>
+    <string name="activity_status_stopped">■ Stopped</string>
+    <string name="activity_status_stopping">■ Stopping…</string>
+    <string name="activity_status_queued">○ Queued</string>
+    <string name="activity_exit_code">Exit code: %1$d</string>
+    <string name="activity_logs_title">Recent output</string>
+    <string name="activity_details_title">Details</string>
+    <string name="activity_stop_confirm_title">Stop activity?</string>
+    <string name="activity_stop_confirm_msg">%1$s will receive a termination signal and shut down gracefully. Other sessions and services are not affected.</string>
+    <string name="stop_all_confirm_title">Stop Noxs?</string>
+    <string name="stop_all_confirm_msg">This will close all active sessions and background processes, then shut down the Noxs Linux environment. Android apps are not affected.</string>
+    <string name="stop_all_positive">Stop Noxs</string>
+    <string name="session_closed_remaining">Session closed — %1$d session(s) still running</string>
+    <string name="session_closed_background">Session closed — background activity still running</string>
+    <string name="noxs_shutting_down">No active sessions — Noxs shutting down…</string>
+    <string name="action_center">Activity</string>
+    <string name="nav_activity_center">Activity Center</string>
+    <string name="float_terminal">Terminal</string>
+    <string name="float_logs">Logs</string>
+    <string name="float_details">Details</string>
+    <string name="float_stop">Stop</string>
+    <string name="float_label_session">Session</string>
+    <string name="float_label_process">Process</string>
+    <string name="float_label_cpu">CPU</string>
+    <string name="float_label_ram">RAM</string>
+    <string name="float_label_uptime">Uptime</string>
+    <string name="float_label_dir">Directory</string>
+    <string name="float_label_pid">PID</string>
+    <string name="notif_action_stop">Stop</string>
+    <!-- Terminal UX upgrade: toolbar, search, session status, scroll modes -->
+    <string name="terminal_scroll_top">Scroll to top</string>
+    <string name="terminal_scroll_bottom">Scroll to bottom</string>
+    <string name="terminal_font_decrease">Decrease font size</string>
+    <string name="terminal_font_increase">Increase font size</string>
+    <string name="terminal_font_current">Current font size — tap to reset</string>
+    <string name="terminal_more">More terminal actions</string>
+    <string name="terminal_search_hint">Search terminal</string>
+    <string name="terminal_search_prev">Previous match</string>
+    <string name="terminal_search_next">Next match</string>
+    <string name="terminal_menu_clear_scrollback">Clear scrollback</string>
+    <string name="terminal_menu_save_output">Save / share output</string>
+    <string name="terminal_menu_reset_font">Reset font size</string>
+    <string name="terminal_menu_fullscreen">Full screen (Ctrl+F)</string>
+    <string name="terminal_menu_fullscreen_exit">Exit full screen (Ctrl+F)</string>
+    <string name="terminal_fullscreen_enter">Full screen — press Ctrl+F to exit</string>
+    <string name="terminal_fullscreen_exit">Full screen off</string>
+    <string name="terminal_exit_title">Leave Noxs?</string>
+    <string name="terminal_exit_msg">A session is still running. Exit Noxs now?</string>
+    <string name="status_proc_desc">Session process status</string>
+    <string name="status_proc_running">● %1$s · PID %2$d</string>
+    <string name="status_proc_idle">○ %1$s · PID %2$d</string>
+    <string name="status_proc_exited">✓ EXITED (%1$d)</string>
+    <string name="status_proc_failed">✗ FAILED (%1$d)</string>
+    <string name="setup_status_stopped">■ SETUP STOPPED</string>
+    <string name="setup_toolbar_operation">%1$s %2$s</string>
+
+    <!-- Settings → Terminal -->
+    <string name="settings_terminal_title">Terminal</string>
+    <string name="settings_terminal_entry_desc">Appearance, interaction, scrolling, behavior</string>
+    <string name="settings_section_terminal">Terminal</string>
+    <string name="settings_section_advanced">ADVANCED</string>
+    <string name="settings_section_reset">RESET</string>
+    <string name="settings_state_on">%1$s on</string>
+    <string name="settings_state_off">%1$s off</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_appearance_desc">Font, cursor, theme, spacing</string>
+    <string name="settings_interaction">Interaction</string>
+    <string name="settings_interaction_desc">Gestures, selection, toolbar</string>
+    <string name="settings_scrolling">Scrolling</string>
+    <string name="settings_scrolling_desc">Scroll mode, live follow, scrollback</string>
+    <string name="settings_behavior">Behavior</string>
+    <string name="settings_behavior_desc">Sessions, exit, focus</string>
+    <string name="settings_reduce_animations">Reduce animations</string>
+    <string name="settings_reduce_animations_desc">Skip cursor blink and fling physics</string>
+    <string name="settings_text_antialias">Smooth text rendering</string>
+    <string name="settings_text_antialias_desc">Anti-aliased glyphs (turn off for crisper text)</string>
+    <string name="settings_debug_overlay">Debug information</string>
+    <string name="settings_debug_overlay_desc">Show terminal grid metrics while using Noxs</string>
+    <string name="settings_debug_info">Session and rendering details</string>
+    <string name="settings_debug_info_desc">Current effective terminal values</string>
+    <string name="settings_reset_terminal">Reset terminal settings</string>
+    <string name="settings_reset_terminal_desc">Restore all terminal appearance and behavior defaults</string>
+    <string name="settings_reset_confirm_title">Reset terminal settings?</string>
+    <string name="settings_reset_confirm_msg">This restores all terminal appearance and behavior settings to defaults. Your Linux filesystem, installed packages, shell history and sessions are not touched.</string>
+    <string name="settings_reset_positive">Reset</string>
+    <string name="settings_reset_done">Terminal settings restored to defaults</string>
+    <string name="settings_font_size_desc">Terminal glyph size in sp (10–28)</string>
+    <string name="settings_font_family">Font family</string>
+    <string name="settings_font_family_desc">Typeface used for terminal output</string>
+    <string name="settings_line_spacing">Line spacing</string>
+    <string name="settings_line_spacing_desc">Vertical space between terminal rows</string>
+    <string name="settings_letter_spacing">Letter spacing</string>
+    <string name="settings_letter_spacing_desc">Horizontal tracking between glyphs</string>
+    <string name="settings_cursor">Cursor</string>
+    <string name="settings_cursor_style">Cursor style</string>
+    <string name="settings_cursor_style_desc">Block, underline or bar</string>
+    <string name="settings_cursor_blink">Cursor blink</string>
+    <string name="settings_cursor_blink_desc">Blink the cursor when the shell is idle</string>
+    <string name="settings_cursor_blink_period">Blink period</string>
+    <string name="settings_cursor_blink_period_desc">How fast the cursor blinks</string>
+    <string name="settings_cursor_width">Cursor width</string>
+    <string name="settings_cursor_width_desc">Thickness of the underline and bar cursors</string>
+    <string name="settings_surface">Surface</string>
+    <string name="settings_terminal_padding">Terminal padding</string>
+    <string name="settings_terminal_padding_desc">Space between the screen edge and text</string>
+    <string name="settings_opacity">Terminal opacity</string>
+    <string name="settings_opacity_desc">Overall opacity of the terminal canvas</string>
+    <string name="settings_theme">Terminal theme</string>
+    <string name="settings_theme_desc">Color palette for the terminal canvas</string>
+    <string name="settings_pinch_zoom">Pinch to zoom</string>
+    <string name="settings_pinch_zoom_desc">Two fingers to change the font size (10–28 sp)</string>
+    <string name="settings_two_finger_scroll">Two-finger scrolling</string>
+    <string name="settings_two_finger_scroll_desc">Two fingers scroll history; pinch still wins</string>
+    <string name="settings_long_press_selection">Long-press selection</string>
+    <string name="settings_long_press_selection_desc">Long press to select terminal text</string>
+    <string name="settings_auto_scroll_selection">Auto-scroll selection</string>
+    <string name="settings_auto_scroll_selection_desc">Keep scrolling when dragging near the edges</string>
+    <string name="settings_haptic_feedback">Haptic feedback</string>
+    <string name="settings_haptic_feedback_desc">Vibrate on selection and zoom</string>
+    <string name="settings_show_toolbar">Show terminal toolbar</string>
+    <string name="settings_show_toolbar_desc">Compact scroll, clipboard, search and font bar</string>
+    <string name="settings_show_shortcut_keys">Show shortcut keys</string>
+    <string name="settings_show_shortcut_keys_desc">ESC, TAB, CTRL, ALT, arrows and paging keys above the keyboard</string>
+    <string name="settings_scroll_mode">Scroll mode</string>
+    <string name="settings_scroll_mode_desc">Smart follows output; History Mirror reports distance</string>
+    <string name="settings_follow_live_output">Follow live output</string>
+    <string name="settings_follow_live_output_desc">Stay anchored at the newest output</string>
+    <string name="settings_show_new_output_indicator">Show new-output indicator</string>
+    <string name="settings_show_new_output_indicator_desc">Display "↓ N new lines" while you are away</string>
+    <string name="settings_auto_follow_running">Auto-follow while running</string>
+    <string name="settings_auto_follow_running_desc">Keep following output while a process prints</string>
+    <string name="settings_scrollback_desc">History lines kept per session (1,000–50,000)</string>
+    <string name="settings_confirm_exit">Confirm exit</string>
+    <string name="settings_confirm_exit_desc">Ask before leaving while a session is running</string>
+    <string name="settings_keep_alive">Keep sessions alive in background</string>
+    <string name="settings_keep_alive_desc">Continue running when you leave the app</string>
+    <string name="settings_restore_sessions">Restore previous sessions</string>
+    <string name="settings_restore_sessions_desc">Reattach the most recent shell on launch</string>
+    <string name="settings_auto_focus">Auto-focus terminal</string>
+    <string name="settings_auto_focus_desc">Open the keyboard when a session attaches</string>
+    <string name="settings_preserve_scroll">Preserve scroll position</string>
+    <string name="settings_preserve_scroll_desc">Return to where you were reading after switching away</string>
+    <string name="settings_start_fullscreen">Start in full screen</string>
+    <string name="settings_start_fullscreen_desc">Open the terminal with the top options hidden — Ctrl+F toggles it any time</string>
+
+    <!-- Multi-environment manager (spec §1-§55) -->
+    <string name="env_install">Install</string>
+    <string name="env_install_title">Noxs Setup</string>
+    <string name="env_install_steps">Steps</string>
+    <string name="env_install_failed">Setup failed: %1$s</string>
+    <string name="env_install_interrupted">Setup was interrupted. You can remove the incomplete setup or retry later.</string>
+    <string name="env_open_terminal">Open Terminal</string>
+    <string name="env_cancel">Cancel</string>
+    <string name="env_close">Close</string>
+    <string name="env_remove_incomplete">Remove incomplete setup</string>
+    <string name="env_remove">Remove</string>
+    <string name="env_remove_confirm">Remove %1$s? This deletes this environment\'s userspace and installed packages. It does not remove Noxs itself.</string>
+    <string name="env_stage_checking">Checking device</string>
+    <string name="env_stage_downloading">Downloading image</string>
+    <string name="env_stage_verifying">Verifying image</string>
+    <string name="env_stage_extracting">Extracting filesystem</string>
+    <string name="env_stage_configuring">Configuring environment</string>
+    <string name="env_stage_user">Creating user</string>
+    <string name="env_stage_shell">Configuring shell</string>
+    <string name="env_stage_verify_install">Verifying installation</string>
+    <string name="env_password_title">Noxs password</string>
+    <string name="env_password_message">Choose the password for your Linux user (noxs). It stays on the device, is never stored in plaintext and never leaves the app.</string>
+    <string name="env_password_hint">Password (min 4 characters)</string>
+    <string name="env_optional_title">Environment ready — optional components</string>
+    <string name="env_optional_subtitle">Optional, independently installable components (installed via this environment\'s package manager):</string>
+    <string name="env_optional_opencode_note">OpenCode: install it from the terminal with its official installer — Noxs never executes downloaded scripts automatically.</string>
+    <string name="env_error_unknown">Unknown environment</string>
+    <string name="settings_section_environment">Linux Environment</string>
+
+    <string name="settings_section_permissions">Permissions</string>
+    <string name="settings_permission_title">Permission Center</string>
+    <string name="settings_permission_desc">Review what Noxs and its packages may access</string>
+
+    <!-- Web window (Noxs native browser) -->
+    <string name="title_web_window">Noxs Web</string>
+    <string name="web_window_title">Noxs Web</string>
+    <string name="web_close_window">Close window</string>
+    <string name="web_minimize_window">Minimize window</string>
+    <string name="web_fullscreen_window">Fullscreen / restore window</string>
+    <string name="web_security_state">Connection security state</string>
+    <string name="web_address_hint">Search or enter address</string>
+    <string name="web_share">Share URL</string>
+    <string name="web_back">Back</string>
+    <string name="web_forward">Forward</string>
+    <string name="web_fullscreen_content">Fullscreen content</string>
+    <string name="web_reload">Reload page</string>
+    <string name="web_menu">Window menu</string>
+    <string name="web_restore_chip">Noxs Web — tap to restore</string>
+    <string name="web_loading">Loading…</string>
+    <string name="web_loading_percent">Loading… %1$d%%</string>
+    <string name="web_ready">Ready</string>
+    <string name="web_menu_close">Close window</string>
+    <string name="web_menu_minimize">Minimize</string>
+    <string name="web_menu_fullscreen_window">Fullscreen window</string>
+    <string name="web_close_confirm">Close this Noxs web window?</string>
+    <string name="web_close_yes">Close</string>
+    <string name="web_upload_picker">Choose file to upload</string>
+    <string name="web_download_blocked">Download blocked: unsafe URL or filename</string>
+    <string name="web_download_started">Downloading %1$s into Noxs storage</string>
+    <string name="web_download_failed">Download could not be started</string>
+
+    <!-- Permission Center -->
+    <string name="title_permission_center">Permission Center</string>
+    <string name="perm_search_hint">Search permissions…</string>
+    <string name="perm_continue">Continue to Noxs Home</string>
+    <string name="perm_network_title">Network</string>
+    <string name="perm_network_info">Internet access is enabled for Noxs.</string>
+    <string name="perm_state_allowed">Allowed</string>
+    <string name="perm_state_not_granted">Not granted</string>
+    <string name="perm_state_denied">Denied</string>
+    <string name="perm_state_restricted">Restricted</string>
+    <string name="perm_state_not_supported">Not supported</string>
+    <string name="perm_open_settings">Open Android settings</string>
+    <string name="perm_group_notifications">Notifications</string>
+    <string name="perm_group_storage">Storage / Files</string>
+    <string name="perm_group_background">Background activity</string>
+    <string name="perm_group_device">Device features</string>
+    <string name="perm_group_system">System integration</string>
+    <string name="perm_group_environment">Noxs environment access</string>
+
+    <!-- Plugin Store -->
+    <string name="nav_plugins">Plugins</string>
+    <string name="plugin_store_title">Plugins</string>
+    <string name="plugin_store_search_hint">Search plugins…</string>
+    <string name="plugin_store_loading">Loading plugins…</string>
+    <string name="plugin_store_empty">The Noxs Plugin Store is unavailable right now. Check your connection and try again.</string>
+    <string name="plugin_store_no_results">No plugins match your search.</string>
+    <string name="plugin_store_no_updates">Everything is up to date.</string>
+    <string name="plugin_filter_all">All</string>
+    <string name="plugin_filter_installed">Installed</string>
+    <string name="plugin_filter_updates">Updates</string>
+    <string name="plugin_action_install">Install</string>
+    <string name="plugin_action_update">Update</string>
+    <string name="plugin_action_open">Open</string>
+    <string name="plugin_action_enable">Enable</string>
+    <string name="plugin_action_disable">Disable</string>
+    <string name="plugin_action_uninstall">Uninstall</string>
+    <string name="plugin_action_working">Working…</string>
+    <string name="plugin_installing_toast">Installing plugin…</string>
+    <string name="plugin_installed_toast">%1$s installed</string>
+    <string name="plugin_install_failed_toast">Unable to install plugin.</string>
+    <string name="plugin_enabled_toast">%1$s enabled</string>
+    <string name="plugin_opened_toast">Plugin activated</string>
+    <string name="plugin_action_failed">The action could not be completed.</string>
+    <string name="plugin_uninstall_title">Uninstall %1$s?</string>
+    <string name="plugin_uninstall_message">The plugin and its files will be removed from the Noxs environment.</string>
+    <string name="plugin_details_back">← </string>
+    <string name="plugin_details_title">Plugin Details</string>
+    <string name="plugin_details_author">Author</string>
+    <string name="plugin_details_license">License</string>
+    <string name="plugin_details_category">Category</string>
+    <string name="plugin_details_minimum">Requires Noxs</string>
+    <string name="plugin_details_repository">Repository</string>
+    <string name="plugin_details_permissions">Permissions</string>
+    <string name="plugin_details_permission_row">✓ %1$s</string>
+    <string name="plugin_details_no_permissions">This plugin declares no permissions.</string>
+    <string name="plugin_details_commands">Commands: %1$s</string>
+    <string name="plugin_details_readme">README</string>
+    <string name="plugin_details_readme_missing">No README is published for this plugin yet.</string>
+    <string name="title_plugin_window">Plugin window</string>
+    <!-- Noxs Plugin SDK / store compatibility -->
+    <string name="plugin_action_refresh">Refresh</string>
+    <string name="plugin_action_blocked">Update Noxs</string>
+    <string name="plugin_badge_new">NEW</string>
+    <string name="plugin_badge_update">UPDATE</string>
+    <string name="plugin_sdk_line">  •  SDK %1$s</string>
+    <string name="plugin_store_offline">Offline — showing the last cached plugin list.</string>
+    <string name="plugin_filter_compatible">Compatible</string>
+    <string name="plugin_filter_app_update">App update required</string>
+    <string name="plugin_filter_incompatible">Incompatible</string>
+    <string name="plugin_filter_blocked">Blocked</string>
+    <string name="plugin_compat_compatible">Compatible</string>
+    <string name="plugin_compat_sdk_missing">SDK will download</string>
+    <string name="plugin_compat_sdk_incompatible">Incompatible with this Noxs</string>
+    <string name="plugin_compat_app_update_required">Noxs update required</string>
+    <string name="plugin_compat_update_available">Update available</string>
+    <string name="plugin_compat_blocked">Blocked</string>
+    <string name="plugin_compat_error">Error</string>
+    <string name="plugin_details_sdk">Noxs Plugin SDK</string>
+    <string name="plugin_details_api_features">API features</string>
+    <string name="plugin_details_compatibility">Compatibility: %1$s</string>
+    <string name="plugin_details_installed_version">Installed version</string>
+    <string name="plugin_details_your_noxs">Your Noxs</string>
+    <string name="plugin_update_noxs_required">Update Noxs to %1$s or newer to use this plugin.</string>
+
+    <!-- Header / session state (UI redesign) -->
+    <string name="state_running">RUNNING</string>
+    <string name="state_idle">IDLE</string>
+    <string name="state_exited">EXITED</string>
+    <string name="state_failed">FAILED</string>
+    <string name="header_more">Header options</string>
+    <string name="header_show_stats">Show storage and session details</string>
+    <string name="header_hide_stats">Hide stats details</string>
+    <string name="session_close_confirm_title">Close session?</string>
+    <string name="session_close_confirm_msg">Close %1$s? The shell and anything running inside it will be terminated.</string>
+    <string name="drawer_new_shell">New Shell</string>
+    <string name="drawer_new_root">Root Sandbox</string>
+    <string name="nav_terminal">Terminal</string>
+    <string name="terminal_menu_session_settings">Session settings</string>
+    <string name="terminal_font_size_value">Font size: %1$d sp</string>
+
+    <!-- Settings sections (UI redesign) -->
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_section_performance">PERFORMANCE</string>
+    <string name="settings_section_session">Session</string>
+    <string name="settings_section_network">Bootstrap &amp; Network</string>
+    <string name="settings_header_stats">Show CPU and memory in header</string>
+    <string name="settings_header_stats_desc">Live resource usage next to the session name</string>
+    <string name="settings_dark_theme">Dark theme</string>
+    <string name="settings_dark_theme_desc">Noxs uses one high-contrast dark theme across the app</string>
+    <!-- Settings redesign: sections, descriptions, numeric/network validation -->
+    <string name="settings_section_general">General</string>
+    <string name="settings_section_storage">Storage &amp; Performance</string>
+    <string name="settings_header_stats_short">Show CPU and memory in header</string>
+    <string name="settings_header_stats_short_desc">Display CPU and memory usage in the terminal header</string>
+    <string name="settings_keep_awake_desc">Keep CPU awake — servers stay reachable outside Noxs</string>
+    <string name="settings_max_sessions_desc">Maximum concurrent terminal sessions</string>
+    <string name="settings_max_procs_desc">Maximum processes allowed in a session</string>
+    <string name="settings_storage_warn_desc">Alert when storage usage exceeds this value (MB)</string>
+    <string name="settings_rootfs_url_desc">Use a custom Linux root filesystem URL (https)</string>
+    <string name="settings_dns_desc">Guest DNS servers, one per line (IPv4/IPv6)</string>
+    <string name="settings_dns_note">Applies to the Linux environment resolver (/etc/resolv.conf inside Noxs) — Android system DNS is never modified.</string>
+    <string name="settings_url_note">Optional. Leave empty to use the official Noxs mirrors. Remote downloads require https.</string>
+    <string name="settings_value_sessions">%1$d concurrent sessions</string>
+    <string name="settings_value_processes">%1$d processes</string>
+    <string name="settings_value_mb">%1$d MB</string>
+    <string name="settings_value_dns_servers">%1$d servers</string>
+    <string name="settings_error_range">Enter a number between %1$d and %2$d</string>
+    <string name="settings_error_min_value">Enter a value of at least %1$d</string>
+    <string name="settings_error_url">Enter a valid https:// URL, or leave the field empty</string>
+    <string name="settings_error_dns">Invalid IP address: %1$s</string>
+    <string name="settings_edit_value">Edit value</string>
+    <string name="settings_edit_url">Custom rootfs URL</string>
+    <string name="settings_edit_dns">DNS servers</string>
+    <string name="settings_dns_hint">One server per line. Blank lines and # comments are ignored.</string>
+    <string name="settings_extra_keys_desc">Display additional keys above the keyboard</string>
+    <string name="settings_volume_keys_desc">Use volume keys for terminal navigation</string>
+    <string name="settings_bell_desc">Play a sound on terminal events</string>
+
+<!-- Editor: code-server (VS Code Server) workspace rendered in a WebView -->
+    <string name="title_editor">Editor</string>
+    <string name="nav_editor">Editor</string>
+
+<!-- NoxOS emulator (Noxs × NoxOS integration, M2+) -->
+    <string name="nav_noxos">NoxOS</string>
+    <string name="title_emulator">NoxOS Emulator</string>
+    <string name="emulator_status_idle">NoxOS is ready to boot</string>
+    <string name="emulator_status_preparing">Preparing the VM…</string>
+    <string name="emulator_status_installing">Installing the QEMU runtime (one-time, Ubuntu apt)…</string>
+    <string name="emulator_status_booting">Booting NoxOS…</string>
+    <string name="emulator_status_running">NoxOS is running — tap the display to interact</string>
+    <string name="emulator_status_stopped">VM stopped</string>
+    <string name="emulator_status_failed">VM failed to start</string>
+    <string name="emulator_retry">Try again</string>
+    <string name="emulator_power_off">Power off VM</string>
+    <string name="emulator_power_confirm">Stop the NoxOS VM? The guest is not suspended and anything in memory is lost.</string>
+    <string name="emulator_keyboard">Toggle keyboard</string>
+    <string name="emulator_logs">VM logs</string>
+    <string name="emulator_logs_title">VM logs (tail)</string>
+    <string name="emulator_display">NoxOS display</string>
+    <string name="emulator_fullscreen">Full screen</string>
+    <string name="emulator_fullscreen_exit">Exit full screen</string>
+    <string name="emulator_setup_required">The Noxs Linux environment is not set up yet. Open the terminal setup first, then boot NoxOS.</string>
+    <string name="emulator_stops_on_exit">Note: the VM keeps running while Noxs is alive; it stops if Android kills the app (background handling arrives in M8).</string>
+    <!-- Live setup progress (percent + stage, M2) -->
+    <string name="emulator_percent_format">%1$d%% · %2$s</string>
+    <string name="emulator_stage_storage">Preparing VM storage…</string>
+    <string name="emulator_stage_kernel">Provisioning kernel…</string>
+    <string name="emulator_stage_lists">Refreshing package lists…</string>
+    <string name="emulator_stage_download">Downloading packages…</string>
+    <string name="emulator_stage_dpkg">Installing packages…</string>
+
+    <!-- VNC bridge connection states (top-bar status chip, lifecycle spec) -->
+    <string name="emulator_conn_connecting">VNC·CONNECT</string>
+    <string name="emulator_conn_handshake">VNC·HANDSHAKE</string>
+    <string name="emulator_conn_sync">VNC·SYNC</string>
+    <string name="emulator_conn_live">VNC·LIVE</string>
+    <string name="emulator_conn_reconnect">VNC·RC %1$d/%2$d</string>
+    <string name="emulator_conn_failed">VNC·ERROR</string>
+    <string name="emulator_status_stopping">Stopping NoxOS VM…</string>
+
+    <string name="action_back">‹</string>
+    <string name="editor_open_terminal">Open in Terminal</string>
+    <string name="editor_action_reload">Reload</string>
+    <string name="editor_menu">⋮</string>
+    <string name="editor_menu_restart">Restart server</string>
+    <string name="editor_menu_stop">Stop server</string>
+    <string name="editor_menu_log">Server log</string>
+    <string name="editor_retry">Retry</string>
+    <string name="editor_start">Start editor</string>
+    <string name="editor_chip_checking">checking</string>
+    <string name="editor_chip_installing">installing</string>
+    <string name="editor_chip_starting">starting</string>
+    <string name="editor_chip_opening">opening</string>
+    <string name="editor_chip_ready">ready</string>
+    <string name="editor_chip_failed">failed</string>
+    <string name="editor_chip_stopped">stopped</string>
+    <string name="editor_phase_checking">Checking the code-server installation…</string>
+    <string name="editor_phase_installing">Installing code-server into your Noxs environment…</string>
+    <string name="editor_phase_starting">Starting the code-server…</string>
+    <string name="editor_phase_opening">Opening the workspace…</string>
+    <string name="editor_phase_failed">The editor could not start</string>
+    <string name="editor_phase_stopped">code-server stopped</string>
+    <string name="editor_install_hint">Downloading the official code-server release for your architecture (~500 MB).\n\nKeep the app open — progress appears below.</string>
+    <string name="editor_stopped_hint">The editor server is stopped.\n\nStart it again when you need it.</string>
+    <string name="editor_auth_unavailable">Server authentication is not configured — start the server again.</string>
+    <string name="editor_auth_failed">Could not authenticate against the local server.</string>
+    <string name="editor_server_unreachable">The editor server stopped responding — retry to restart it.</string>
+    <string name="editor_log_empty">No server log yet.</string>
+    <string name="editor_open_terminal_missing">Workspace folder is missing — retry to re-resolve it.</string>
+    <string name="editor_open_terminal_failed">Could not create a terminal session here: %1$s</string>
+    <string name="editor_session_created">Terminal opened at %1$s</string>
+    <string name="editor_workspace_missing">Workspace folder not found — opening /home/noxs</string>
+</resources>

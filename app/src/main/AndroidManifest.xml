@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Noxs — original Debian-optimized Linux userspace for Android.
+  Declares only sandbox-respecting permissions. No storage-sweeping or
+  superuser permissions are requested.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".NoxsApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="false"
+        android:theme="@style/Theme.Noxs"
+        tools:targetApi="34">
+
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.SetupActivity"
+            android:exported="false"
+            android:label="@string/title_setup"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.TerminalActivity"
+            android:exported="false"
+            android:label="@string/title_terminal"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.ActivityCenterActivity"
+            android:exported="false"
+            android:label="@string/title_activity_center" />
+
+        <activity
+            android:name=".emulator.EmulatorActivity"
+            android:exported="false"
+            android:label="@string/title_emulator"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.FileBrowserActivity"
+            android:exported="false"
+            android:label="@string/title_file_browser" />
+
+        <activity
+            android:name=".ui.EditorActivity"
+            android:exported="false"
+            android:label="@string/title_editor"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PackageManagerActivity"
+            android:exported="false"
+            android:label="@string/title_package_manager" />
+
+        <activity
+            android:name=".ui.UserManagerActivity"
+            android:exported="false"
+            android:label="@string/title_user_manager" />
+
+        <activity
+            android:name=".ui.ProcessManagerActivity"
+            android:exported="false"
+            android:label="@string/title_process_manager" />
+
+        <activity
+            android:name=".ui.ServiceManagerActivity"
+            android:exported="false"
+            android:label="@string/title_service_manager" />
+
+        <activity
+            android:name=".ui.EnvVarsActivity"
+            android:exported="false"
+            android:label="@string/title_env_vars" />
+
+        <activity
+            android:name=".ui.StorageActivity"
+            android:exported="false"
+            android:label="@string/title_storage" />
+
+        <activity
+            android:name=".ui.SecurityActivity"
+            android:exported="false"
+            android:label="@string/title_security" />
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_settings" />
+
+        <activity
+            android:name=".ui.TerminalSettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_terminal_title" />
+
+        <activity
+            android:name=".ui.TerminalSettingsSubActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DiagnosticsActivity"
+            android:exported="false"
+            android:label="@string/title_diagnostics" />
+
+        <activity
+            android:name=".ui.AboutActivity"
+            android:exported="false"
+            android:label="@string/title_about" />
+
+        <!-- Debian environment installer (single-environment setup) -->
+        <activity
+            android:name=".ui.EnvironmentInstallActivity"
+            android:exported="false"
+            android:label="@string/env_install_title" />
+
+        <activity
+            android:name=".ui.WebWindowActivity"
+            android:exported="false"
+            android:label="@string/title_web_window"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PluginStoreActivity"
+            android:exported="false"
+            android:label="@string/plugin_store_title"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PluginDetailsActivity"
+            android:exported="false"
+            android:label="@string/plugin_details_title"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PluginWindowActivity"
+            android:exported="false"
+            android:label="@string/title_plugin_window"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PermissionCenterActivity"
+            android:exported="false"
+            android:label="@string/title_permission_center" />
+
+        <service
+            android:name=".runtime.NoxsService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!--
+          Storage Access Framework provider: exposes ONLY the Noxs Linux home
+          (/home/noxs) to the system Files app and document pickers. The
+          visibility policy (home-only allowlist, traversal + symlink
+          rejection, name sanitization) lives in NoxsDocumentsPolicy; the
+          documents live in this app's own sandbox, so no storage permission
+          is needed. exported=true + MANAGE_DOCUMENTS are the platform's
+          standard documents-provider requirements (held by DocumentsUI).
+        -->
+        <provider
+            android:name=".runtime.NoxsDocumentsProvider"
+            android:authorities="${applicationId}.documents"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
+    </application>
+</manifest>

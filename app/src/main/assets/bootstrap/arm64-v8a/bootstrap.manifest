@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "arch": "arm64-v8a",
+  "rootfs": {
+    "url": "https://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04.5-base-arm64.tar.gz",
+    "sha256": "a91d5a93010193712d346d761372b7c9db6dfcf093893161c64ca107f05914f2",
+    "format": "tar.gz",
+    "sizeBytes": 29936675
+  },
+  "generatedAt": "2026-11-07T01:55:00Z",
+  "source": "scripts/build-rootfs.sh"
+}
