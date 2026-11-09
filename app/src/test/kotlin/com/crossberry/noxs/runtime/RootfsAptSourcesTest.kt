@@ -46,14 +46,13 @@ class RootfsAptSourcesTest {
         assertTrue(File(sourceDir, "preferences").isFile)
     }
 
-    @Test fun `amd64 builds use the same Kali rolling archive`() {
+    @Test fun `amd64 builds use the same official Kali rolling archive`() {
         val paths = NoxsPaths(temporary.newFolder("rootfs-amd64"))
         RootfsConfigurator.configureAptSources(paths, useHttps = true, arch = "x86_64")
         val source = File(paths.rootfs, "etc/apt/sources.list.d/noxs.sources").readText()
         assertTrue(source.contains("URIs: https://http.kali.org/kali"))
-        assertTrue(source.contains("URIs: https://http.kali.org/kali"))
-        assertTrue(source.contains("Suites: noble-security"))
-        assertFalse(source.contains("http.kali.org"))
+        assertTrue(source.contains("Suites: kali-rolling"))
+        assertTrue(source.contains("Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg"))
     }
 
     @Test fun `dpkg status backups get owner write access without touching outside files`() {
