@@ -27,8 +27,10 @@ import java.net.Socket
 class VncClient(
     private val host: String,
     private val port: Int,
-    private val listener: Listener
+    private val listener: Listener,
+    password: CharArray? = null
 ) {
+    private val authPassword: CharArray? = password?.clone()
 
     interface Listener {
         /** Connect attempt started (before the TCP connect). Lets the UI
@@ -124,7 +126,7 @@ class VncClient(
             // 1–3. ProtocolVersion + Security + ClientInit/ServerInit.
             // The byte-level contract lives in VncHandshake (unit tested
             // against a spec-accurate synthetic QEMU server stream).
-            val init = VncHandshake.performHandshake(input, out)
+            val init = VncHandshake.performHandshake(input, out, authPassword)
             listener.onConnected(init.width, init.height, init.name)
 
             // 4. Our pixel format + raw encoding + first full update request.
@@ -213,6 +215,7 @@ class VncClient(
         } finally {
             runCatching { socket?.close() }
             dataOut = null
+            authPassword?.fill('\\u0000')
             listener.onClosed(error)
         }
     }
