@@ -23,7 +23,7 @@ class RootfsAptSourcesTest {
         // The Kali base image may ship its own source file — the configurator
         // must remove it along with any other active source definitions.
         File(sourceDir, "kali.sources").writeText("stock base image sources\n")
-        File(sourceDir, "extra.list").writeText("deb http://extra.example noble main\n")
+        File(sourceDir, "extra.list").writeText("deb http://extra.example kali-rolling main\n")
         File(sourceDir, "preferences").writeText("keep non-source apt configuration\n")
 
         RootfsConfigurator.configureAptSources(paths, useHttps = true, arch = "arm64-v8a")
@@ -94,7 +94,7 @@ class RootfsAptSourcesTest {
         RootfsConfigurator.configureAptSources(paths, useHttps = false, arch = "arm64-v8a")
         val source = File(paths.rootfs, "etc/apt/sources.list.d/noxs.sources").readText()
         assertTrue(source.contains("URIs: http://http.kali.org/kali"))
-        assertTrue(source.contains("Suites: noble-security"))
+        assertTrue(source.contains("Suites: kali-rolling"))
         assertTrue(source.contains("Signed-By: /usr/share/keyrings/kali-archive-keyring.gpg"))
     }
 
