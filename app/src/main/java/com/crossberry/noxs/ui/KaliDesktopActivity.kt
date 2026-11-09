@@ -54,11 +54,13 @@ class KaliDesktopActivity : AppCompatActivity() {
     }
 
     private fun connect() {
-        if (password.text.isNullOrBlank()) {
+        val entered = password.text
+        if (entered.isNullOrBlank()) {
             status.text = getString(R.string.kali_desktop_password_hint)
             return
         }
-        val secret = password.text.toString().toCharArray()
+        val secret = CharArray(entered.length) { index -> entered[index] }
+        entered.clear()
         status.text = getString(R.string.kali_desktop_starting)
         Thread {
             val kex = createManager()
