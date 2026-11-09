@@ -19,16 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Enable ARM64 emulation for offline Debian
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
-
-      - name: Build bundled offline Debian 12 (ARM64)
-        run: |
-          chmod +x scripts/build-offline-rootfs.sh
-          scripts/build-offline-rootfs.sh
-
       - name: JDK 17
         uses: actions/setup-java@v4
         with:
@@ -100,15 +90,6 @@ jobs:
         with:
           name: noxs-release-apk
           path: app/build/outputs/apk/release/app-release.apk
-
-      - name: Upload offline Ubuntu rootfs for release
-        uses: actions/upload-artifact@v4
-        with:
-          name: noxs-offline-rootfs-arm64
-          path: |
-            app/src/main/assets/bootstrap/arm64-v8a/rootfs.bin
-            app/src/main/assets/bootstrap/arm64-v8a/bootstrap.manifest
-          retention-days: 3
 
       - name: Upload test reports
         if: always()
@@ -237,20 +218,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download offline Ubuntu rootfs bundle
-        uses: actions/download-artifact@v4
-        with:
-          name: noxs-offline-rootfs-arm64
-          path: offline-rootfs
-
-      - name: Stage offline Ubuntu assets
-        run: |
-          mkdir -p app/src/main/assets/bootstrap/arm64-v8a
-          # rootfs.bin is the gzip rootfs under an aapt-safe name: aapt/AAPT2
-          # decompresses .gz assets and strips the suffix at packaging time.
-          cp offline-rootfs/rootfs.bin app/src/main/assets/bootstrap/arm64-v8a/rootfs.bin
-          cp offline-rootfs/bootstrap.manifest app/src/main/assets/bootstrap/arm64-v8a/bootstrap.manifest
-
       - name: Resolve release version from tag
         id: release_version
         shell: bash
@@ -340,13 +307,6 @@ jobs:
           unzip -l "$APK" | grep -F "assets/bootstrap/arm64-v8a/rootfs.bin" >/dev/null
           mkdir -p release-assets
           cp "$APK" "release-assets/noxs-${RELEASE_VERSION}.apk"
-          cp offline-rootfs/rootfs.bin "release-assets/noxs-debian-bookworm-arm64.tar.gz"
-          # Publish the checksum sidecar next to the asset so installed APKs
-          # whose embedded manifest pin is stale can still verify downloads.
-          sha256sum offline-rootfs/rootfs.bin \
-            | awk '{print $1"  noxs-debian-bookworm-arm64.tar.gz"}' \
-            > release-assets/noxs-debian-bookworm-arm64.tar.gz.sha256
-          cat release-assets/noxs-debian-bookworm-arm64.tar.gz.sha256
 
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
@@ -359,6 +319,4 @@ jobs:
         with:
           files: |
             release-assets/noxs-${{ steps.release_version.outputs.version }}.apk
-            release-assets/noxs-debian-bookworm-arm64.tar.gz
-            release-assets/noxs-debian-bookworm-arm64.tar.gz.sha256
           generate_release_notes: true
