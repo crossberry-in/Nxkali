@@ -1,6 +1,6 @@
 /*
  * Noxs — original implementation.
- * Ubuntu-first migration manager tests (spec §9): install classification,
+ * Kali Linux-first migration manager tests (spec §9): install classification,
  * backup planning and honest user-data scoping. Pure JVM (no Android).
  */
 package com.crossberry.noxs.runtime
@@ -23,8 +23,8 @@ class NoxsMigrationManagerTest {
 
     // ------------------------------------------------------- classification
 
-    @Test fun `distro=ubuntu classifies as ubuntu`() {
-        assertEquals("ubuntu", NoxsMigrationManager.classifyInstall(
+    @Test fun `distro=ubuntu is unsupported`() {
+        assertEquals("unknown", NoxsMigrationManager.classifyInstall(
             marker("installed=1\narch=arm64-v8a\nrootfs_sha256=abc\ndistro=ubuntu\nrelease=noble\nsuite=noble\n")
         ))
     }
@@ -47,7 +47,7 @@ class NoxsMigrationManagerTest {
         ))
     }
 
-    @Test fun `noble suite without distro key still reads ubuntu`() {
+    @Test fun `unknown suite without distro key stays unsupported`() {
         assertEquals("ubuntu", NoxsMigrationManager.classifyInstall(
             marker("installed=1\nsuite=noble\n")
         ))
@@ -56,6 +56,7 @@ class NoxsMigrationManagerTest {
     @Test fun `isLegacyDebianInstall matches only debian`() {
         assertTrue(NoxsMigrationManager.isLegacyDebianInstall(marker("suite=bookworm\n")))
         assertFalse(NoxsMigrationManager.isLegacyDebianInstall(marker("distro=ubuntu\nsuite=noble\n")))
+        assertFalse(NoxsMigrationManager.isLegacyDebianInstall(marker("suite=noble\n")))
         assertFalse(NoxsMigrationManager.isLegacyDebianInstall(marker("")))
     }
 
