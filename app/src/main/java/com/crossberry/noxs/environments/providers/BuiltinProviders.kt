@@ -1,17 +1,8 @@
 /*
- * Noxs — original implementation.
- * Builtin environment providers (spec §2-§8 of the Kali Linux-first spec).
+ * NxKali — built-in environment providers.
  *
- * Kali Linux (NetHunter Rootless) is the one and only environment for fresh
- * installs: installed through the proven NoxsInstaller pipeline (staged
- * downloads, TarGuard extraction, signed APT bootstrap) from the pinned,
- * official kali.download kali-base ARM64 artifact. There is no
- * distribution selector and no Debian fallback — the installer downloads and
- * installs ONLY the genuine Kali Linux (NetHunter Rootless) ARM64 rootfs.
- *
- * Existing (pre-migration) Debian installations of upgrading users are NOT
- * providers: they are imported read-only as a legacy environment by
- * NoxsEnvironmentManager (spec §9 — never silently erased, user data kept).
+ * Kali Linux (NetHunter Rootless) is the only fresh-install environment.
+ * Existing Debian installations are preserved for read-only migration.
  */
 package com.crossberry.noxs.environments.providers
 
@@ -21,46 +12,8 @@ import com.crossberry.noxs.environments.model.EnvironmentCapability
 import com.crossberry.noxs.environments.model.CompatibilityReport
 import com.crossberry.noxs.environments.model.EnvironmentVariant
 
-// ------------------------------------------------------------------ Kali Linux
-
 /**
- * Kali Linux (NetHunter Rootless) — the one Noxs environment (Kali Linux-first
- * spec). Installation runs the proven NoxsInstaller pipeline (staged
- * downloads, TarGuard extraction, signed APT bootstrap) against the official
- * Kali NetHunter Rootless minimal rootfs artifact, then configures the official
- * Kali rolling repository (http.kali.org/kali for all architectures)
- * and the `noxs@kali:~` terminal identity.
- * Noxs — original implementation.
- * Builtin environment providers (spec §2-§8 of the Kali Linux-first spec).
- *
- * Kali Linux (NetHunter Rootless) is the one and only environment for fresh
- * installs: installed through the proven NoxsInstaller pipeline (staged
- * downloads, TarGuard extraction, signed APT bootstrap) from the pinned,
- * official kali.download kali-base ARM64 artifact. There is no
- * distribution selector and no Debian fallback — the installer downloads and
- * installs ONLY the genuine Kali Linux (NetHunter Rootless) ARM64 rootfs.
- *
- * Existing (pre-migration) Debian installations of upgrading users are NOT
- * providers: they are imported read-only as a legacy environment by
- * NoxsEnvironmentManager (spec §9 — never silently erased, user data kept).
- */
-package com.crossberry.noxs.environments.providers
-
-import com.crossberry.noxs.environments.DeviceProfile
-import com.crossberry.noxs.environments.EnvironmentProvider
-import com.crossberry.noxs.environments.model.EnvironmentCapability
-import com.crossberry.noxs.environments.model.CompatibilityReport
-import com.crossberry.noxs.environments.model.EnvironmentVariant
-
-// ------------------------------------------------------------------ Kali Linux
-
-/**
- * Kali Linux (NetHunter Rootless) — the one Noxs environment (Kali Linux-first
- * spec). Installation runs the proven NoxsInstaller pipeline (staged
- * downloads, TarGuard extraction, signed APT bootstrap) against the official
- * Kali NetHunter Rootless minimal rootfs artifact, then configures the official
- * Kali rolling repository (http.kali.org/kali for all architectures)
- *  terminal identity.
+ * Kali Linux (NetHunter Rootless) provider using the Noxs installer pipeline.
  */
 class KaliProvider : EnvironmentProvider {
     override val id = "kali"
