@@ -31,7 +31,7 @@ object VncHandshake {
      * Runs the full RFB 3.8 handshake and returns the parsed [Rfb.ServerInit].
      * Throws with a precise reason on any spec violation.
      */
-    fun performHandshake(input: DataInputStream, out: OutputStream): Rfb.ServerInit {
+    fun performHandshake(input: DataInputStream, out: OutputStream, password: CharArray? = null): Rfb.ServerInit {
         // 1. ProtocolVersion — negotiate down to the server's version.
         val handshake = ByteArray(12)
         input.readFully(handshake)
@@ -47,8 +47,13 @@ object VncHandshake {
         // 2. Security: RFB 3.3 servers pick the type; 3.7+ send a list.
         if (minor == 3) {
             val chosen = readU32(input).toInt()
-            if (chosen != Rfb.SECURITY_TYPE_NONE) {
-                throw IllegalStateException("server requires auth type $chosen")
+            when (chosen) {
+                Rfb.SECURITY_TYPE_NONE -> Unit
+                VncAuth.SECURITY_TYPE_VNC_AUTH -> {
+                    val secret = password ?: throw IllegalStateException("KeX requires a password")
+                    VncAuth.authenticate(input, out, secret, minor)
+                }
+                else -> throw IllegalStateException("unsupported VNC auth type $chosen")
             }
         } else {
             val count = input.readUnsignedByte()
@@ -60,16 +65,21 @@ object VncHandshake {
             }
             val types = ByteArray(count)
             input.readFully(types)
-            if (!types.any { it.toInt() == Rfb.SECURITY_TYPE_NONE }) {
-                throw IllegalStateException("no None security type offered")
+            val supportsVncAuth = types.any { (it.toInt() and 0xFF) == VncAuth.SECURITY_TYPE_VNC_AUTH }
+            val supportsNone = types.any { (it.toInt() and 0xFF) == Rfb.SECURITY_TYPE_NONE }
+            val chosen = when {
+                password != null && supportsVncAuth -> VncAuth.SECURITY_TYPE_VNC_AUTH
+                supportsNone -> Rfb.SECURITY_TYPE_NONE
+                supportsVncAuth -> throw IllegalStateException("KeX requires a password")
+                else -> throw IllegalStateException("no supported VNC security type offered")
             }
-            out.write(Rfb.SECURITY_TYPE_NONE)
+            out.write(chosen)
             out.flush()
-            if (minor >= 8) {
+            if (chosen == VncAuth.SECURITY_TYPE_VNC_AUTH) {
+                VncAuth.authenticate(input, out, password!!, minor)
+            } else if (minor >= 8) {
                 val result = readU32(input).toInt()
-                if (result != 0) {
-                    throw IllegalStateException("security handshake failed ($result)")
-                }
+                if (result != 0) throw IllegalStateException("security handshake failed ($result)")
             }
         }
 
