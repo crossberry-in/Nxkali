@@ -44,6 +44,15 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:text="@string/welcome_open_terminal" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_kali_desktop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:enabled="false"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:text="@string/welcome_kali_desktop" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
