@@ -32,6 +32,12 @@ class VncClient(
 ) {
     private val authPassword: CharArray? = password?.clone()
 
+    init {
+        require(host == "127.0.0.1" || host == "localhost") {
+            "VNC connections are restricted to the local device"
+        }
+    }
+
     interface Listener {
         /** Connect attempt started (before the TCP connect). Lets the UI
          *  surface CONNECTING separately from the handshake that follows. */
