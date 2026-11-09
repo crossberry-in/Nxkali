@@ -27,9 +27,40 @@ import com.crossberry.noxs.environments.model.EnvironmentVariant
  * Kali Linux (NetHunter Rootless) — the one Noxs environment (Kali Linux-first
  * spec). Installation runs the proven NoxsInstaller pipeline (staged
  * downloads, TarGuard extraction, signed APT bootstrap) against the official
- * kali.download kali-base artifact, then configures the official
- * Kali Linux repositories (ports.kali.com on arm64, archive.kali.com on
- * amd64) and the `noxs@kali:~$` terminal identity.
+ * Kali NetHunter Rootless minimal rootfs artifact, then configures the official
+ * Kali rolling repository (http.kali.org/kali for all architectures)
+ * and the `noxs@kali:~/*
+ * Noxs — original implementation.
+ * Builtin environment providers (spec §2-§8 of the Kali Linux-first spec).
+ *
+ * Kali Linux (NetHunter Rootless) is the one and only environment for fresh
+ * installs: installed through the proven NoxsInstaller pipeline (staged
+ * downloads, TarGuard extraction, signed APT bootstrap) from the pinned,
+ * official kali.download kali-base ARM64 artifact. There is no
+ * distribution selector and no Debian fallback — the installer downloads and
+ * installs ONLY the genuine Kali Linux (NetHunter Rootless) ARM64 rootfs.
+ *
+ * Existing (pre-migration) Debian installations of upgrading users are NOT
+ * providers: they are imported read-only as a legacy environment by
+ * NoxsEnvironmentManager (spec §9 — never silently erased, user data kept).
+ */
+package com.crossberry.noxs.environments.providers
+
+import com.crossberry.noxs.environments.DeviceProfile
+import com.crossberry.noxs.environments.EnvironmentProvider
+import com.crossberry.noxs.environments.model.EnvironmentCapability
+import com.crossberry.noxs.environments.model.CompatibilityReport
+import com.crossberry.noxs.environments.model.EnvironmentVariant
+
+// ------------------------------------------------------------------ Kali Linux
+
+/**
+ * Kali Linux (NetHunter Rootless) — the one Noxs environment (Kali Linux-first
+ * spec). Installation runs the proven NoxsInstaller pipeline (staged
+ * downloads, TarGuard extraction, signed APT bootstrap) against the official
+ * Kali NetHunter Rootless minimal rootfs artifact, then configures the official
+ * Kali rolling repository (http.kali.org/kali for all architectures)
+ *  terminal identity.
  */
 class KaliProvider : EnvironmentProvider {
     override val id = "kali"
@@ -85,8 +116,8 @@ class KaliProvider : EnvironmentProvider {
     override fun variants(): List<EnvironmentVariant> = listOf(
         EnvironmentVariant(
             id = "kali-rootless",
-            name = "Kali Linux (NetHunter Rootless)",
-            description = "Genuine Kali Linux (NetHunter Rootless) arm64 — the only Noxs environment",
+            name = "Kali NetHunter Rootless (minimal)",
+            description = "Official Kali NetHunter Rootless minimal userspace for ARM64, ARMHF, and x86_64",
             downloadBytesEstimate = 125_829_120L,
             extractedBytesEstimate = 900_000_000L,
             isDefault = true
