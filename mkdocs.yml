@@ -1,14 +1,9 @@
-# Noxs documentation — Material for MkDocs (Material Design UI + Material Icons)
-# Deployed to GitHub Pages by .github/workflows/docs.yml
-
-site_name: Noxs Docs
-site_description: >-
-  Noxs — a Debian-optimized Linux environment for Android. A real Debian 12
-  userspace with APT, sudo, Unix sockets and a real terminal, inside the
-  Android app sandbox. A small Linux computer in your pocket.
-site_url: https://crossberry-in.github.io/noxs/
-repo_url: https://github.com/crossberry-in/noxs
-repo_name: crossberry-in/noxs
+# NxKali documentation — Material for MkDocs
+site_name: NxKali Docs
+site_description: Kali NetHunter Rootless for Android with a private terminal and local KeX desktop.
+site_url: https://crossberry-in.github.io/Nxkali/
+repo_url: https://github.com/crossberry-in/Nxkali
+repo_name: crossberry-in/Nxkali
 edit_uri: edit/main/docs/
 
 theme:
@@ -18,7 +13,6 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    # Material Design light / dark schemes with automatic + manual toggle
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: white
@@ -85,26 +79,26 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Guides:
-      - Ubuntu setup: UBUNTU-SETUP.md
+      - Kali setup: KALI-SETUP.md
       - Terminal UX: TERMINAL-UX.md
       - Activity Center: ACTIVITY-CENTER.md
       - Editor (code-server): CODE-SERVER.md
       - NX Package System: PACKAGES.md
-      - Debian Mirror: MIRROR.md
+      - Package mirror: MIRROR.md
       - Certificates & APT repair: CERT-FIX.md
       - AI Agent Terminal: AI-AGENT.md
       - Native Browser: WEB-BROWSER.md
       - Docker: DOCKER.md
   - Architecture & Security:
       - Architecture: ARCHITECTURE.md
-      - Ubuntu architecture (Ubuntu-first): UBUNTU-ARCHITECTURE.md
+      - Kali architecture: KALI-ARCHITECTURE.md
       - Bootstrap system: BOOTSTRAP.md
       - Security model: SECURITY.md
       - Unix domain sockets: UNIX-SOCKETS.md
       - Permission Center: PERMISSION-CENTER.md
       - Rust performance core: RUST-CORE.md
-  - Extending Noxs:
-      - Noxs API (@noxs/nx-api): NX-API.md
+  - Extending NxKali:
+      - NxKali API (@noxs/nx-api): NX-API.md
       - Plugin SDK: PLUGIN-SDK.md
       - nx-installer: NX-INSTALLER.md
   - NoxOS Emulator:
@@ -112,5 +106,5 @@ nav:
       - QEMU on Android (M1): QEMU-ANDROID.md
   - Development:
       - Testing & CI: TESTING.md
-      - Ubuntu test report: UBUNTU-TEST-REPORT.md
+      - Kali test report: KALI-TEST-REPORT.md
       - FAQ: FAQ.md
