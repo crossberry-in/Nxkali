@@ -470,7 +470,7 @@ printf 'ID=fedora\n' > "$WORK/os.fedora"
 PKG_OS_RELEASE="$WORK/os.debian" pkgm_detect_os
 [ "$PKG_OS" = "debian" ] && pass "Debian detected" || fail "debian detect: $PKG_OS"
 PKG_OS_RELEASE="$WORK/os.ubuntu" pkgm_detect_os
-[ "$PKG_OS" = "ubuntu" ] && pass "Ubuntu detected (ID)" || fail "ubuntu detect: $PKG_OS"
+[ "$PKG_OS" = "unknown" ] && pass "Ubuntu is not a supported guest OS" || fail "Ubuntu must be unsupported: $PKG_OS"
 PKG_OS_RELEASE="$WORK/os.fedora" pkgm_detect_os
 [ "$PKG_OS" = "unknown" ] && pass "non-Debian OS -> unknown (Noxs packages only)" || fail "fedora detect"
 for code in PACKAGE_NOT_FOUND UNSUPPORTED_ARCHITECTURE NETWORK_ERROR DOWNLOAD_FAILED \
