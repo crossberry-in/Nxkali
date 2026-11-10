@@ -84,4 +84,14 @@
         <item name="android:textSize">14sp</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <!-- Compatibility aliases: existing layouts still reference the original style names. -->
+    <style name="Text.Noxs.Title" parent="Text.NxKali.Title" />
+    <style name="Text.Noxs.Body" parent="Text.NxKali.Body" />
+    <style name="Text.Noxs.Mono" parent="Text.NxKali.Mono" />
+    <style name="Text.Noxs.PillButton" parent="Text.NxKali.PillButton" />
+    <style name="Text.Noxs.NavRow" parent="Text.NxKali.NavRow" />
+    <style name="Text.Noxs.NavIcon" parent="Text.NxKali.NavIcon" />
+    <style name="Text.Noxs.NavLabel" parent="Text.NxKali.NavLabel" />
+
 </resources>
