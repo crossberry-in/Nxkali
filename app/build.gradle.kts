@@ -14,7 +14,7 @@ android {
     ndkVersion = "26.3.11579264"
 
     defaultConfig {
-        applicationId = "com.crossberry.noxs"
+        applicationId = "com.crossberry.nxkali"
         minSdk = 24
         targetSdk = 34
         versionCode = noxsVersionCode
