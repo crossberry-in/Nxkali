@@ -6,7 +6,8 @@
  *   - the archive lives inside the Noxs-controlled boundary
  *   - the destination is inside the same boundary
  *   - every entry stays inside the destination (TarGuard: absolute paths,
- *     ../ traversal, device files, setuid bits are rejected)
+ *     ../ traversal and link escapes are rejected; /dev device/FIFO nodes are
+ *     skipped because PRoot bind-mounts the host /dev at runtime)
  *   - symlinks never resolve outside the destination root
  * Extraction never targets arbitrary Android filesystem locations.
  */
