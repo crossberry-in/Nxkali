@@ -1,13 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">NxKali</title>
-  <desc id="desc">A cyan geometric N with a violet signal accent on a deep navy rounded square.</desc>
+  <desc id="desc">A white stylized Kali-inspired dragon above a glowing cyan terminal prompt on a deep navy background.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111A35"/><stop offset="1" stop-color="#080D1B"/></linearGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72EDFF"/><stop offset="1" stop-color="#278CFF"/></linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#C4A0FF"/><stop offset="1" stop-color="#8054F6"/></linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07152F"/><stop offset=".55" stop-color="#030711"/><stop offset="1" stop-color="#10102B"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#37F4FF"/><stop offset="1" stop-color="#0878FF"/></linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#C77BFF"/><stop offset="1" stop-color="#603CFF"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
-  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)"/>
-  <path d="M112 374V138h70l148 176V138h70v236h-70L182 198v176z" fill="url(#mark)"/>
-  <path d="M354 76h42v-42h42v42h42v42h-42v42h-42v-42h-42z" fill="url(#accent)"/>
-  <path d="M112 410h288v12H112z" fill="#B6F3FF" opacity=".8"/>
+  <rect x="12" y="12" width="488" height="488" rx="112" fill="url(#bg)" stroke="url(#cyan)" stroke-width="8"/>
+  <path d="M82 185C137 105 245 77 330 112c44 18 79 51 105 92l-34-12 18 40-48-23c-14 35-42 58-81 65-40 7-76-5-99-31 38 9 69 2 91-20-44-7-72-32-85-74-31 28-67 43-115 36Z" fill="none" stroke="#F4F8FF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M103 168c52-40 111-55 171-44M300 126l-27-45 54 28M356 147l40-27 9 55" fill="none" stroke="url(#cyan)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="92" y="278" width="328" height="132" rx="27" fill="#050D1D" stroke="url(#cyan)" stroke-width="9" filter="url(#glow)"/>
+  <path d="m158 316 45 29-45 30M234 376h55" fill="none" stroke="#F7FBFF" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M365 432h58" stroke="url(#violet)" stroke-width="8" stroke-linecap="round"/>
 </svg>
