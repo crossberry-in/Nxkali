@@ -86,6 +86,23 @@ class RootfsExtractorTest {
         assertEquals("#!/bin/sh\n", File(root, "bin/sh").readText())
     }
 
+    @Test fun `strips Kali archive wrapper so passwd is at rootfs etc`() {
+        val tar = tarEntries(
+            dirEntry("kali-arm64"),
+            dirEntry("kali-arm64/etc"),
+            fileEntry("kali-arm64/etc/passwd", "root:x:0:0:root:/root:/bin/bash\\n"),
+            dirEntry("kali-arm64/usr/bin"),
+            fileEntry("kali-arm64/usr/bin/id", "ELF")
+        )
+        val root = tmp.newFolder("rootfs")
+        RootfsExtractor(root).extract(writeGzip(tar))
+
+        assertTrue(File(root, "etc").isDirectory)
+        assertEquals("root:x:0:0:root:/root:/bin/bash\\n", File(root, "etc/passwd").readText())
+        assertTrue(File(root, "usr/bin/id").isFile)
+        assertTrue(!File(root, "kali-arm64").exists())
+    }
+
     @Test fun `strips setuid bit from file modes`() {
         // mode 4755 (setuid + rwxr-xr-x)
         val tar = tarEntries(fileEntry("usr/bin/passwd", "x", mode = 0b111_101_101 or 0b100_000_000_000))
