@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Noxs — original Debian-optimized Linux userspace for Android.
+  NxKali — Kali NetHunter Rootless for Android.
   Declares only sandbox-respecting permissions. No storage-sweeping or
   superuser permissions are requested.
 -->
@@ -24,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="false"
-        android:theme="@style/Theme.Noxs"
+        android:theme="@style/Theme.NxKali"
         tools:targetApi="34">
 
         <activity
