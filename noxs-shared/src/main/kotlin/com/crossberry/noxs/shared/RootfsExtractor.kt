@@ -133,7 +133,7 @@ class RootfsExtractor(private val root: File) {
      */
     private fun stripKaliArchiveRoot(name: String): String {
         TarGuard.safeResolve(root, name) // reject absolute paths and traversal before rewriting
-        val parts = name.replace('\\\\', '/').split('/').filter { it.isNotEmpty() && it != "." }
+        val parts = name.replace('\\', '/').split('/').filter { it.isNotEmpty() && it != "." }
         return if (parts.firstOrNull() == "kali-arm64") parts.drop(1).joinToString("/")
         else name
     }
