@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Noxs logo: an original "N" hex glyph (vector, self-authored) -->
+<!-- NxKali brand mark used on the welcome screen. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M30,78 L30,30 L38,30 L64,62 L64,30 L72,30 L72,78 L64,78 L38,46 L38,78 Z" />
-    <path
-        android:fillColor="#FFBDBDBD"
-        android:pathData="M30,84 L78,84 L78,88 L30,88 Z" />
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FF45D7FF"
+        android:pathData="M23,79 L23,29 L39,29 L69,65 L69,29 L85,29 L85,79 L69,79 L39,43 L39,79 Z" />
+    <path android:fillColor="#FF8B5CF6"
+        android:pathData="M75,20 L85,20 L85,10 L95,10 L95,20 L105,20 L105,30 L95,30 L95,40 L85,40 L85,30 L75,30 Z" />
+    <path android:fillColor="#FFB6F3FF"
+        android:pathData="M23,86 L85,86 L85,91 L23,91 Z" />
 </vector>
