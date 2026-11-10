@@ -90,7 +90,7 @@ class RootfsExtractorTest {
         val tar = tarEntries(
             dirEntry("kali-arm64"),
             dirEntry("kali-arm64/etc"),
-            fileEntry("kali-arm64/etc/passwd", "root:x:0:0:root:/root:/bin/bash\\n"),
+            fileEntry("kali-arm64/etc/passwd", "root:x:0:0:root:/root:/bin/bash\n"),
             dirEntry("kali-arm64/usr/bin"),
             fileEntry("kali-arm64/usr/bin/id", "ELF")
         )
@@ -98,7 +98,7 @@ class RootfsExtractorTest {
         RootfsExtractor(root).extract(writeGzip(tar))
 
         assertTrue(File(root, "etc").isDirectory)
-        assertEquals("root:x:0:0:root:/root:/bin/bash\\n", File(root, "etc/passwd").readText())
+        assertEquals("root:x:0:0:root:/root:/bin/bash\n", File(root, "etc/passwd").readText())
         assertTrue(File(root, "usr/bin/id").isFile)
         assertTrue(!File(root, "kali-arm64").exists())
     }
