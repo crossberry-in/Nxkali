@@ -164,9 +164,10 @@ class RootfsExtractorTest {
         val root = tmp.newFolder("rootfs")
         RootfsExtractor(root).extract(writeGzip(tar))
 
-        val dev = File(root, "kali-arm64/dev")
+        val dev = File(root, "dev")
         assertTrue(dev.isDirectory)
         assertTrue(dev.listFiles().orEmpty().isEmpty())
+        assertTrue(!File(root, "kali-arm64").exists())
     }
 
     @Test fun `skips device nodes in unprefixed dev directory`() {
