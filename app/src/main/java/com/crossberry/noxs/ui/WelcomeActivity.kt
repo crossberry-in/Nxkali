@@ -49,21 +49,28 @@ class WelcomeActivity : AppCompatActivity() {
         binding.btnKaliDesktop.setOnClickListener {
             startActivity(Intent(this, KaliDesktopActivity::class.java))
         }
-        binding.btnTerminal.setOnClickListener {
-            if (permissionOnboardingPending()) {
-                // First-launch flow (Noxs API spec §9): Permission Center ->
-                // verify -> Noxs Home. Runs once; afterwards the terminal
-                // opens directly.
-                NoxsService.start(this)
-                startActivity(
-                    Intent(this, PermissionCenterActivity::class.java)
-                        .putExtra(PermissionCenterActivity.EXTRA_FIRST_RUN, true)
-                )
-                return@setOnClickListener
-            }
-            NoxsService.start(this)
-            startActivity(Intent(this, TerminalActivity::class.java))
+        binding.btnTerminal.setOnClickListener { openLinuxSession() }
+
+        // Once setup is complete, opening NxKali goes straight to a live Kali
+        // shell. The first-run permission screen remains in the flow and still
+        // requires the user's explicit Android permission decisions.
+        if (ready && savedInstanceState == null) {
+            openLinuxSession()
+            finish()
         }
+    }
+
+    private fun openLinuxSession() {
+        if (permissionOnboardingPending()) {
+            NoxsService.start(this)
+            startActivity(
+                Intent(this, PermissionCenterActivity::class.java)
+                    .putExtra(PermissionCenterActivity.EXTRA_FIRST_RUN, true)
+            )
+            return
+        }
+        NoxsService.start(this)
+        startActivity(Intent(this, TerminalActivity::class.java))
     }
 
     private fun permissionOnboardingPending(): Boolean {
