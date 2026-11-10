@@ -33,7 +33,9 @@ jobs:
         run: |
           SDK="$HOME/android-sdk"
           mkdir -p "$SDK/cmdline-tools"
-          curl -fsSL -o /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          rm -f /tmp/clt.zip
+          curl --fail --show-error --location --retry 5 --retry-all-errors --retry-delay 10 --connect-timeout 30 --max-time 600 --output /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -tq /tmp/clt.zip
           unzip -q /tmp/clt.zip -d "$SDK/cmdline-tools"
           mv "$SDK/cmdline-tools/cmdline-tools" "$SDK/cmdline-tools/latest"
           SDKM="$SDK/cmdline-tools/latest/bin/sdkmanager"
@@ -77,18 +79,18 @@ jobs:
       - name: Verify debug APK application ID
         run: |
           "$ANDROID_HOME/build-tools/34.0.0/aapt" dump badging app/build/outputs/apk/debug/app-debug.apk \
-            | grep -F "package: name='com.crossberry.noxs'" >/dev/null
+            | grep -F "package: name='com.crossberry.nxkali'" >/dev/null
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: noxs-debug-apk
+          name: nxkali-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
         with:
-          name: noxs-release-apk
+          name: nxkali-release-apk
           path: app/build/outputs/apk/release/app-release.apk
 
       - name: Upload test reports
@@ -139,7 +141,9 @@ jobs:
         run: |
           SDK="$HOME/android-sdk"
           mkdir -p "$SDK/cmdline-tools"
-          curl -fsSL -o /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          rm -f /tmp/clt.zip
+          curl --fail --show-error --location --retry 5 --retry-all-errors --retry-delay 10 --connect-timeout 30 --max-time 600 --output /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -tq /tmp/clt.zip
           unzip -q /tmp/clt.zip -d "$SDK/cmdline-tools"
           mv "$SDK/cmdline-tools/cmdline-tools" "$SDK/cmdline-tools/latest"
           SDKM="$SDK/cmdline-tools/latest/bin/sdkmanager"
@@ -252,7 +256,9 @@ jobs:
         run: |
           SDK="$HOME/android-sdk"
           mkdir -p "$SDK/cmdline-tools"
-          curl -fsSL -o /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          rm -f /tmp/clt.zip
+          curl --fail --show-error --location --retry 5 --retry-all-errors --retry-delay 10 --connect-timeout 30 --max-time 600 --output /tmp/clt.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -tq /tmp/clt.zip
           unzip -q /tmp/clt.zip -d "$SDK/cmdline-tools"
           mv "$SDK/cmdline-tools/cmdline-tools" "$SDK/cmdline-tools/latest"
           SDKM="$SDK/cmdline-tools/latest/bin/sdkmanager"
@@ -301,7 +307,7 @@ jobs:
         run: |
           APK="app/build/outputs/apk/release/app-release.apk"
           AAPT="$ANDROID_HOME/build-tools/34.0.0/aapt"
-          "$AAPT" dump badging "$APK" | grep -F "package: name='com.crossberry.noxs'" >/dev/null
+          "$AAPT" dump badging "$APK" | grep -F "package: name='com.crossberry.nxkali'" >/dev/null
           # The bundled asset must be reachable under the manifest's name —
           # guard against aapt ever resurrecting its .gz handling.
           unzip -l "$APK" | grep -F "assets/bootstrap/arm64-v8a/rootfs.bin" >/dev/null
@@ -311,12 +317,12 @@ jobs:
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: noxs-${{ steps.release_version.outputs.version }}
-          path: release-assets/noxs-${{ steps.release_version.outputs.version }}.apk
+          name: nxkali-${{ steps.release_version.outputs.version }}
+          path: release-assets/nxkali-${{ steps.release_version.outputs.version }}.apk
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release-assets/noxs-${{ steps.release_version.outputs.version }}.apk
+            release-assets/nxkali-${{ steps.release_version.outputs.version }}.apk
           generate_release_notes: true
