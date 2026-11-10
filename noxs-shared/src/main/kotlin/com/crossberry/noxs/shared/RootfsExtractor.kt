@@ -140,6 +140,11 @@ class RootfsExtractor(private val root: File) {
 
     private fun handleEntry(original: TarReader.Entry, payload: InputStream) {
         val normalizedName = stripKaliArchiveRoot(original.name)
+        // The wrapper directory itself maps to the root and needs no filesystem entry.
+        if (normalizedName.isEmpty()) {
+            if (original.type == TarReader.Type.DIR) return
+            throw SecurityException("Invalid empty rootfs entry: ${original.name}")
+        }
         val entry = original.copy(
             name = normalizedName,
             linkName = if (original.type == TarReader.Type.HARDLINK)
