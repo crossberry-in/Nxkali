@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Noxs" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.NxKali" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/noxs_accent</item>
         <item name="colorOnPrimary">@color/noxs_on_accent</item>
         <item name="colorPrimaryContainer">@color/noxs_elevated</item>
@@ -31,22 +31,22 @@
     </style>
 
     <!-- Typography -->
-    <style name="Text.Noxs.Title" parent="TextAppearance.Material3.HeadlineMedium">
+    <style name="Text.NxKali.Title" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="android:textColor">@color/noxs_text</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.Noxs.Body" parent="TextAppearance.Material3.BodyMedium">
+    <style name="Text.NxKali.Body" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textColor">@color/noxs_text_dim</item>
     </style>
 
-    <style name="Text.Noxs.Mono" parent="TextAppearance.Material3.BodySmall">
+    <style name="Text.NxKali.Mono" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textColor">@color/noxs_text</item>
         <item name="android:fontFamily">monospace</item>
     </style>
 
     <!-- Compact pill button used across the terminal chrome (28dp tall). -->
-    <style name="Text.Noxs.PillButton" parent="Text.Noxs.Mono">
+    <style name="Text.NxKali.PillButton" parent="Text.NxKali.Mono">
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
@@ -57,7 +57,7 @@
     </style>
 
     <!-- Drawer navigation: uniform 48dp row, 22dp icon, aligned label -->
-    <style name="Text.Noxs.NavRow" parent="">
+    <style name="Text.NxKali.NavRow" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:orientation">horizontal</item>
@@ -69,14 +69,14 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <style name="Text.Noxs.NavIcon" parent="">
+    <style name="Text.NxKali.NavIcon" parent="">
         <item name="android:layout_width">22dp</item>
         <item name="android:layout_height">22dp</item>
         <item name="android:tint">@color/noxs_text_dim</item>
         <item name="android:importantForAccessibility">no</item>
     </style>
 
-    <style name="Text.Noxs.NavLabel" parent="">
+    <style name="Text.NxKali.NavLabel" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
