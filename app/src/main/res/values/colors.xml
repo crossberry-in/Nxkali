@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Noxs design system — mobile-first dark palette.
+  NxKali design system — mobile-first dark palette.
   Backgrounds are layered: pure black canvas, #111111 panels, #191919
   navigation, #222222 elevated surfaces, #303030 borders. The single accent
   (#20D866) marks interactive/positive state; warning and error are reserved
@@ -60,5 +60,5 @@
     <color name="settings_divider">#FF243347</color>
     <color name="settings_disabled">#FF626B78</color>
     <color name="settings_error">#FFFF5B67</color>
-    <color name="ic_launcher_background">#FF000000</color>
+    <color name="ic_launcher_background">#FF0B1020</color>
 </resources>
