@@ -125,7 +125,26 @@ class RootfsExtractor(private val root: File) {
         return dir.isDirectory || dir.mkdirs() || dir.isDirectory
     }
 
-    private fun handleEntry(entry: TarReader.Entry, payload: InputStream) {
+    /**
+     * Kali's official NetHunter rootfs tarball wraps the filesystem in a
+     * single top-level "kali-arm64/" directory. Strip that archive wrapper
+     * so /etc/passwd lands at rootfs/etc/passwd, not rootfs/kali-arm64/etc/passwd.
+     * Validate the original name first; never normalize away traversal.
+     */
+    private fun stripKaliArchiveRoot(name: String): String {
+        TarGuard.safeResolve(root, name) // reject absolute paths and traversal before rewriting
+        val parts = name.replace('\\\\', '/').split('/').filter { it.isNotEmpty() && it != "." }
+        return if (parts.firstOrNull() == "kali-arm64") parts.drop(1).joinToString("/")
+        else name
+    }
+
+    private fun handleEntry(original: TarReader.Entry, payload: InputStream) {
+        val normalizedName = stripKaliArchiveRoot(original.name)
+        val entry = original.copy(
+            name = normalizedName,
+            linkName = if (original.type == TarReader.Type.HARDLINK)
+                stripKaliArchiveRoot(original.linkName) else original.linkName
+        )
         when (entry.type) {
             TarReader.Type.DIR -> {
                 val dir = TarGuard.safeResolve(root, entry.name)
