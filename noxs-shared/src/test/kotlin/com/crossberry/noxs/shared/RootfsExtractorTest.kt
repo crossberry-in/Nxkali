@@ -136,15 +136,64 @@ class RootfsExtractorTest {
         }
     }
 
-    @Test fun `rejects device and fifo entries`() {
-        val tar = tarEntries(tarHeader("dev/null", 0, '3'.code.toByte()) to ByteArray(0))
+    @Test fun `skips Kali rootfs device nodes and fifo under dev`() {
+        val tar = tarEntries(
+            dirEntry("kali-arm64/dev"),
+            tarHeader("kali-arm64/dev/full", 0, '3'.code.toByte()) to ByteArray(0),
+            tarHeader("kali-arm64/dev/null", 0, '3'.code.toByte()) to ByteArray(0),
+            tarHeader("kali-arm64/dev/sda", 0, '4'.code.toByte()) to ByteArray(0),
+            tarHeader("kali-arm64/dev/console", 0, '6'.code.toByte()) to ByteArray(0)
+        )
+        val root = tmp.newFolder("rootfs")
+        RootfsExtractor(root).extract(writeGzip(tar))
+
+        val dev = File(root, "kali-arm64/dev")
+        assertTrue(dev.isDirectory)
+        assertTrue(dev.listFiles().orEmpty().isEmpty())
+    }
+
+    @Test fun `skips device nodes in unprefixed dev directory`() {
+        val tar = tarEntries(
+            dirEntry("dev"),
+            tarHeader("dev/zero", 0, '3'.code.toByte()) to ByteArray(0),
+            tarHeader("dev/loop0", 0, '4'.code.toByte()) to ByteArray(0),
+            tarHeader("dev/log", 0, '6'.code.toByte()) to ByteArray(0)
+        )
+        val root = tmp.newFolder("rootfs")
+        RootfsExtractor(root).extract(writeGzip(tar))
+
+        assertTrue(File(root, "dev").isDirectory)
+        assertTrue(File(root, "dev").listFiles().orEmpty().isEmpty())
+    }
+
+    @Test fun `rejects device and fifo entries outside dev`() {
+        val entries = listOf(
+            tarHeader("kali-arm64/etc/full", 0, '3'.code.toByte()) to ByteArray(0),
+            tarHeader("kali-arm64/tmp/pipe", 0, '6'.code.toByte()) to ByteArray(0)
+        )
+        for (entry in entries) {
+            val root = tmp.newFolder()
+            try {
+                RootfsExtractor(root).extract(writeGzip(tarEntries(entry)))
+                fail("Expected SecurityException for special entry outside dev")
+            } catch (e: Exception) {
+                assertTrue("Got: $e", e is SecurityException || e.cause is SecurityException)
+            }
+        }
+    }
+
+    @Test fun `rejects traversal in special device entry`() {
+        val tar = tarEntries(
+            tarHeader("kali-arm64/dev/../../outside", 0, '3'.code.toByte()) to ByteArray(0)
+        )
         val root = tmp.newFolder("rootfs")
         try {
             RootfsExtractor(root).extract(writeGzip(tar))
-            fail("Expected SecurityException for device entry")
+            fail("Expected SecurityException for special-entry traversal")
         } catch (e: Exception) {
             assertTrue("Got: $e", e is SecurityException || e.cause is SecurityException)
         }
+        assertTrue(!File(tmp.root, "outside").exists())
     }
 
     @Test fun `accepts in-root symlink`() {
