@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Noxs strings (original) -->
+<!-- NxKali strings (original) -->
 <resources>
-    <string name="app_name">Noxs</string>
+    <string name="app_name">NxKali</string>
     <string name="app_tagline">Set up your Linux environment</string>
 
     <!-- Welcome -->
     <string name="welcome_setup">Set up your Linux environment</string>
     <string name="welcome_open_terminal">Open terminal</string>
-    <string name="welcome_disclaimer">Your Linux environment stays within Noxs. Start when you’re ready.</string>
+    <string name="welcome_disclaimer">Your Linux environment stays within NxKali. Start when you’re ready.</string>
 
     <!-- Setup -->
-    <string name="title_setup">Noxs</string>
+    <string name="title_setup">NxKali</string>
     <string name="setup_subtitle">Set up your Linux environment</string>
-    <string name="setup_password_title">The password is for your Noxs Linux environment.</string>
+    <string name="setup_password_title">The password is for your NxKali Linux environment.</string>
     <string name="setup_password_hint">Password</string>
     <string name="setup_password2_hint">Confirm password</string>
     <string name="setup_password_min_length">Use at least 4 characters.</string>
@@ -33,13 +33,13 @@
     <string name="setup_step_run">Initializing /run and /var/run</string>
     <string name="setup_step_apt">Repairing dpkg and verifying Kali Linux HTTPS certificates</string>
     <string name="setup_step_shell">Preparing first shell</string>
-    <string name="setup_done">Noxs is ready</string>
+    <string name="setup_done">NxKali is ready</string>
     <string name="setup_done_msg">Your Linux environment is ready.</string>
     <string name="setup_open_terminal">Open terminal</string>
     <string name="apt_background_failed">APT security setup will retry on the next launch. %1$s</string>
 
     <!-- Setup console: the real terminal IS the setup screen -->
-    <string name="setup_status_idle">● NOXS SETUP</string>
+    <string name="setup_status_idle">● NXKALI SETUP</string>
     <string name="setup_status_awaiting">● AWAITING PASSWORD</string>
     <string name="setup_status_running">● SETUP RUNNING</string>
     <string name="setup_status_completed">✓ SETUP COMPLETE</string>
@@ -56,7 +56,7 @@
     <string name="setup_stop_title">Stop setup?</string>
     <string name="setup_stop_msg">The active setup process will be stopped. Verified partial downloads are kept and you can retry later.</string>
     <string name="setup_back_title">Setup is still running</string>
-    <string name="setup_back_msg">Noxs keeps setting up in the background. You can return anytime.</string>
+    <string name="setup_back_msg">NxKali keeps setting up in the background. You can return anytime.</string>
 
     <!-- Terminal -->
     <string name="title_terminal">Terminal</string>
@@ -75,7 +75,7 @@
     <string name="nav_security">Security</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_diagnostics">Diagnostics</string>
-    <string name="nav_about">About Noxs</string>
+    <string name="nav_about">About NxKali</string>
     <string name="status_cpu">CPU %1$s%%</string>
     <string name="status_mem">MEM %1$s/%2$s MB</string>
     <string name="status_storage">ROOTFS %1$s MB</string>
@@ -104,7 +104,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="err_generic">Something went wrong. See Diagnostics for details.</string>
     <string name="err_storage">Unable to initialize app storage.</string>
-    <string name="err_storage_space">Not enough free storage. Noxs needs about 1 GB free to install — free up space and try again.</string>
+    <string name="err_storage_space">Not enough free storage. NxKali needs about 1 GB free to install — free up space and try again.</string>
     <string name="err_network">Couldn’t reach the download servers. Check your internet connection (try Wi-Fi or mobile data) and tap Try again.</string>
     <string name="err_bootstrap_corrupt">The downloaded files were corrupted and could not be verified. Tap Try again — the download restarts fresh.</string>
     <string name="err_bootstrap">Unable to start Linux environment. Check your connection and retry.</string>
@@ -114,7 +114,7 @@
     <string name="err_capability">Required capability is unavailable on this Android device.</string>
     <string name="err_not_installed">The Linux environment is not set up yet.</string>
     <string name="confirm_reset_title">Reset Linux environment?</string>
-    <string name="confirm_reset_msg">This deletes the Noxs Kali Linux root filesystem, including /home/noxs. You will need to run setup again. It does not modify Android folders selected through SAF.</string>
+    <string name="confirm_reset_msg">This deletes the NxKali Kali Linux root filesystem, including /home/noxs. You will need to run setup again. It does not modify Android folders selected through SAF.</string>
 
     <!-- Package manager -->
     <string name="title_package_manager">Packages</string>
@@ -125,7 +125,7 @@
 
     <!-- Files -->
     <string name="title_file_browser">Files</string>
-    <string name="files_root_label">Noxs rootfs</string>
+    <string name="files_root_label">NxKali rootfs</string>
     <string name="files_empty">Empty directory</string>
 
     <!-- Users -->
@@ -161,7 +161,7 @@
     <string name="title_storage">Storage</string>
     <string name="storage_rootfs">Root filesystem</string>
     <string name="storage_apt_cache">APT package cache</string>
-    <string name="storage_open_noxs_files">Open Noxs Linux Home in Files</string>
+    <string name="storage_open_noxs_files">Open NxKali Linux Home in Files</string>
     <string name="storage_open_noxs_files_desc">Browse and edit guest files with Android\'s document picker (read/write)</string>
     <string name="storage_logs">App logs</string>
     <string name="storage_clear_cache">Clear APT cache</string>
@@ -170,7 +170,7 @@
 
     <!-- Security -->
     <string name="title_security">Security &amp; sandbox</string>
-    <string name="security_notice">Noxs runs inside the Android application sandbox. It does not modify the Android system, does not bypass SELinux, and sudo grants privileges only within the Noxs environment.</string>
+    <string name="security_notice">NxKali runs inside the Android application sandbox. It does not modify the Android system, does not bypass SELinux, and sudo grants privileges only within the NxKali environment.</string>
 
     <!-- Settings -->
     <string name="title_settings">Settings</string>
@@ -180,7 +180,7 @@
     <string name="settings_volume_keys">Volume keys as arrows</string>
     <string name="settings_bell">Audible bell</string>
     <string name="settings_section_background">Background</string>
-    <string name="settings_keep_awake">Keep CPU awake while running (servers stay reachable outside Noxs)</string>
+    <string name="settings_keep_awake">Keep CPU awake while running (servers stay reachable outside NxKali)</string>
     <string name="settings_max_sessions">Session quota</string>
     <string name="settings_max_procs">Process quota per session</string>
     <string name="settings_storage_warn">Storage warning threshold (MB)</string>
@@ -194,30 +194,30 @@
     <string name="diag_clear">Clear</string>
 
     <!-- About -->
-    <string name="title_about">About Noxs</string>
-    <string name="about_body">Noxs by CrossberryWeb.\n\nFor help, feedback, or support:\nWebsite: https://crossberry.vercel.app\nEmail: crossberryweb@gmail.com</string>
-    <string name="about_licenses">Open-source software:\n\u2022 Editor: code-server (MIT) \u2014 github.com/coder/code-server\n\u2022 Editor runtime: Visual Studio Code (MIT) \u2014 github.com/microsoft/vscode\n\u2022 Both are downloaded at install time into the Noxs guest and never bundled with the APK</string>
+    <string name="title_about">About NxKali</string>
+    <string name="about_body">NxKali by CrossberryWeb.\n\nFor help, feedback, or support:\nWebsite: https://crossberry.vercel.app\nEmail: crossberryweb@gmail.com</string>
+    <string name="about_licenses">Open-source software:\n\u2022 Editor: code-server (MIT) \u2014 github.com/coder/code-server\n\u2022 Editor runtime: Visual Studio Code (MIT) \u2014 github.com/microsoft/vscode\n\u2022 Both are downloaded at install time into the NxKali guest and never bundled with the APK</string>
     <string name="about_version">Version %1$s</string>
 
     <!-- Notifications -->
-    <string name="notif_short_title">Noxs</string>
+    <string name="notif_short_title">NxKali</string>
     <string name="notif_running_one">● Running: %1$s</string>
     <string name="notif_running_many">● Running: %1$s (+%2$d more)</string>
-    <string name="notif_title">Noxs Linux environment</string>
+    <string name="notif_title">NxKali Linux environment</string>
     <string name="notif_sessions">%1$d terminal session(s) running</string>
     <string name="notif_idle">Linux environment running</string>
-    <string name="channel_runtime">Noxs runtime</string>
-    <string name="channel_activity">Noxs Activity</string>
+    <string name="channel_runtime">NxKali runtime</string>
+    <string name="channel_activity">NxKali Activity</string>
 
     <!-- Session manager (drawer list) -->
     <string name="session_close">Close</string>
     <string name="session_root_badge">ROOT</string>
 
     <!-- Background Activity Center -->
-    <string name="title_activity_center">Noxs Activity</string>
+    <string name="title_activity_center">NxKali Activity</string>
     <string name="activity_open">Open</string>
     <string name="activity_stop">Stop</string>
-    <string name="activity_stop_noxs">Stop Noxs</string>
+    <string name="activity_stop_noxs">Stop NxKali</string>
     <string name="activity_clear_finished">Clear finished</string>
     <string name="activity_section_running">RUNNING</string>
     <string name="activity_section_completed">COMPLETED</string>
@@ -236,12 +236,12 @@
     <string name="activity_details_title">Details</string>
     <string name="activity_stop_confirm_title">Stop activity?</string>
     <string name="activity_stop_confirm_msg">%1$s will receive a termination signal and shut down gracefully. Other sessions and services are not affected.</string>
-    <string name="stop_all_confirm_title">Stop Noxs?</string>
-    <string name="stop_all_confirm_msg">This will close all active sessions and background processes, then shut down the Noxs Linux environment. Android apps are not affected.</string>
-    <string name="stop_all_positive">Stop Noxs</string>
+    <string name="stop_all_confirm_title">Stop NxKali?</string>
+    <string name="stop_all_confirm_msg">This will close all active sessions and background processes, then shut down the NxKali Linux environment. Android apps are not affected.</string>
+    <string name="stop_all_positive">Stop NxKali</string>
     <string name="session_closed_remaining">Session closed — %1$d session(s) still running</string>
     <string name="session_closed_background">Session closed — background activity still running</string>
-    <string name="noxs_shutting_down">No active sessions — Noxs shutting down…</string>
+    <string name="noxs_shutting_down">No active sessions — NxKali shutting down…</string>
     <string name="action_center">Activity</string>
     <string name="nav_activity_center">Activity Center</string>
     <string name="float_terminal">Terminal</string>
@@ -273,8 +273,8 @@
     <string name="terminal_menu_fullscreen_exit">Exit full screen (Ctrl+F)</string>
     <string name="terminal_fullscreen_enter">Full screen — press Ctrl+F to exit</string>
     <string name="terminal_fullscreen_exit">Full screen off</string>
-    <string name="terminal_exit_title">Leave Noxs?</string>
-    <string name="terminal_exit_msg">A session is still running. Exit Noxs now?</string>
+    <string name="terminal_exit_title">Leave NxKali?</string>
+    <string name="terminal_exit_msg">A session is still running. Exit NxKali now?</string>
     <string name="status_proc_desc">Session process status</string>
     <string name="status_proc_running">● %1$s · PID %2$d</string>
     <string name="status_proc_idle">○ %1$s · PID %2$d</string>
@@ -304,7 +304,7 @@
     <string name="settings_text_antialias">Smooth text rendering</string>
     <string name="settings_text_antialias_desc">Anti-aliased glyphs (turn off for crisper text)</string>
     <string name="settings_debug_overlay">Debug information</string>
-    <string name="settings_debug_overlay_desc">Show terminal grid metrics while using Noxs</string>
+    <string name="settings_debug_overlay_desc">Show terminal grid metrics while using NxKali</string>
     <string name="settings_debug_info">Session and rendering details</string>
     <string name="settings_debug_info_desc">Current effective terminal values</string>
     <string name="settings_reset_terminal">Reset terminal settings</string>
@@ -374,7 +374,7 @@
 
     <!-- Multi-environment manager (spec §1-§55) -->
     <string name="env_install">Install</string>
-    <string name="env_install_title">Noxs Setup</string>
+    <string name="env_install_title">NxKali Setup</string>
     <string name="env_install_steps">Steps</string>
     <string name="env_install_failed">Setup failed: %1$s</string>
     <string name="env_install_interrupted">Setup was interrupted. You can remove the incomplete setup or retry later.</string>
@@ -383,7 +383,7 @@
     <string name="env_close">Close</string>
     <string name="env_remove_incomplete">Remove incomplete setup</string>
     <string name="env_remove">Remove</string>
-    <string name="env_remove_confirm">Remove %1$s? This deletes this environment\'s userspace and installed packages. It does not remove Noxs itself.</string>
+    <string name="env_remove_confirm">Remove %1$s? This deletes this environment\'s userspace and installed packages. It does not remove NxKali itself.</string>
     <string name="env_stage_checking">Checking device</string>
     <string name="env_stage_downloading">Downloading image</string>
     <string name="env_stage_verifying">Verifying image</string>
@@ -392,22 +392,22 @@
     <string name="env_stage_user">Creating user</string>
     <string name="env_stage_shell">Configuring shell</string>
     <string name="env_stage_verify_install">Verifying installation</string>
-    <string name="env_password_title">Noxs password</string>
+    <string name="env_password_title">NxKali password</string>
     <string name="env_password_message">Choose the password for your Linux user (noxs). It stays on the device, is never stored in plaintext and never leaves the app.</string>
     <string name="env_password_hint">Password (min 4 characters)</string>
     <string name="env_optional_title">Environment ready — optional components</string>
     <string name="env_optional_subtitle">Optional, independently installable components (installed via this environment\'s package manager):</string>
-    <string name="env_optional_opencode_note">OpenCode: install it from the terminal with its official installer — Noxs never executes downloaded scripts automatically.</string>
+    <string name="env_optional_opencode_note">OpenCode: install it from the terminal with its official installer — NxKali never executes downloaded scripts automatically.</string>
     <string name="env_error_unknown">Unknown environment</string>
     <string name="settings_section_environment">Linux Environment</string>
 
     <string name="settings_section_permissions">Permissions</string>
     <string name="settings_permission_title">Permission Center</string>
-    <string name="settings_permission_desc">Review what Noxs and its packages may access</string>
+    <string name="settings_permission_desc">Review what NxKali and its packages may access</string>
 
-    <!-- Web window (Noxs native browser) -->
-    <string name="title_web_window">Noxs Web</string>
-    <string name="web_window_title">Noxs Web</string>
+    <!-- Web window (NxKali native browser) -->
+    <string name="title_web_window">NxKali Web</string>
+    <string name="web_window_title">NxKali Web</string>
     <string name="web_close_window">Close window</string>
     <string name="web_minimize_window">Minimize window</string>
     <string name="web_fullscreen_window">Fullscreen / restore window</string>
@@ -419,26 +419,26 @@
     <string name="web_fullscreen_content">Fullscreen content</string>
     <string name="web_reload">Reload page</string>
     <string name="web_menu">Window menu</string>
-    <string name="web_restore_chip">Noxs Web — tap to restore</string>
+    <string name="web_restore_chip">NxKali Web — tap to restore</string>
     <string name="web_loading">Loading…</string>
     <string name="web_loading_percent">Loading… %1$d%%</string>
     <string name="web_ready">Ready</string>
     <string name="web_menu_close">Close window</string>
     <string name="web_menu_minimize">Minimize</string>
     <string name="web_menu_fullscreen_window">Fullscreen window</string>
-    <string name="web_close_confirm">Close this Noxs web window?</string>
+    <string name="web_close_confirm">Close this NxKali web window?</string>
     <string name="web_close_yes">Close</string>
     <string name="web_upload_picker">Choose file to upload</string>
     <string name="web_download_blocked">Download blocked: unsafe URL or filename</string>
-    <string name="web_download_started">Downloading %1$s into Noxs storage</string>
+    <string name="web_download_started">Downloading %1$s into NxKali storage</string>
     <string name="web_download_failed">Download could not be started</string>
 
     <!-- Permission Center -->
     <string name="title_permission_center">Permission Center</string>
     <string name="perm_search_hint">Search permissions…</string>
-    <string name="perm_continue">Continue to Noxs Home</string>
+    <string name="perm_continue">Continue to NxKali Home</string>
     <string name="perm_network_title">Network</string>
-    <string name="perm_network_info">Internet access is enabled for Noxs.</string>
+    <string name="perm_network_info">Internet access is enabled for NxKali.</string>
     <string name="perm_state_allowed">Allowed</string>
     <string name="perm_state_not_granted">Not granted</string>
     <string name="perm_state_denied">Denied</string>
@@ -450,14 +450,14 @@
     <string name="perm_group_background">Background activity</string>
     <string name="perm_group_device">Device features</string>
     <string name="perm_group_system">System integration</string>
-    <string name="perm_group_environment">Noxs environment access</string>
+    <string name="perm_group_environment">NxKali environment access</string>
 
     <!-- Plugin Store -->
     <string name="nav_plugins">Plugins</string>
     <string name="plugin_store_title">Plugins</string>
     <string name="plugin_store_search_hint">Search plugins…</string>
     <string name="plugin_store_loading">Loading plugins…</string>
-    <string name="plugin_store_empty">The Noxs Plugin Store is unavailable right now. Check your connection and try again.</string>
+    <string name="plugin_store_empty">The NxKali Plugin Store is unavailable right now. Check your connection and try again.</string>
     <string name="plugin_store_no_results">No plugins match your search.</string>
     <string name="plugin_store_no_updates">Everything is up to date.</string>
     <string name="plugin_filter_all">All</string>
@@ -477,13 +477,13 @@
     <string name="plugin_opened_toast">Plugin activated</string>
     <string name="plugin_action_failed">The action could not be completed.</string>
     <string name="plugin_uninstall_title">Uninstall %1$s?</string>
-    <string name="plugin_uninstall_message">The plugin and its files will be removed from the Noxs environment.</string>
+    <string name="plugin_uninstall_message">The plugin and its files will be removed from the NxKali environment.</string>
     <string name="plugin_details_back">← </string>
     <string name="plugin_details_title">Plugin Details</string>
     <string name="plugin_details_author">Author</string>
     <string name="plugin_details_license">License</string>
     <string name="plugin_details_category">Category</string>
-    <string name="plugin_details_minimum">Requires Noxs</string>
+    <string name="plugin_details_minimum">Requires NxKali</string>
     <string name="plugin_details_repository">Repository</string>
     <string name="plugin_details_permissions">Permissions</string>
     <string name="plugin_details_permission_row">✓ %1$s</string>
@@ -492,9 +492,9 @@
     <string name="plugin_details_readme">README</string>
     <string name="plugin_details_readme_missing">No README is published for this plugin yet.</string>
     <string name="title_plugin_window">Plugin window</string>
-    <!-- Noxs Plugin SDK / store compatibility -->
+    <!-- NxKali Plugin SDK / store compatibility -->
     <string name="plugin_action_refresh">Refresh</string>
-    <string name="plugin_action_blocked">Update Noxs</string>
+    <string name="plugin_action_blocked">Update NxKali</string>
     <string name="plugin_badge_new">NEW</string>
     <string name="plugin_badge_update">UPDATE</string>
     <string name="plugin_sdk_line">  •  SDK %1$s</string>
@@ -505,17 +505,17 @@
     <string name="plugin_filter_blocked">Blocked</string>
     <string name="plugin_compat_compatible">Compatible</string>
     <string name="plugin_compat_sdk_missing">SDK will download</string>
-    <string name="plugin_compat_sdk_incompatible">Incompatible with this Noxs</string>
-    <string name="plugin_compat_app_update_required">Noxs update required</string>
+    <string name="plugin_compat_sdk_incompatible">Incompatible with this NxKali</string>
+    <string name="plugin_compat_app_update_required">NxKali update required</string>
     <string name="plugin_compat_update_available">Update available</string>
     <string name="plugin_compat_blocked">Blocked</string>
     <string name="plugin_compat_error">Error</string>
-    <string name="plugin_details_sdk">Noxs Plugin SDK</string>
+    <string name="plugin_details_sdk">NxKali Plugin SDK</string>
     <string name="plugin_details_api_features">API features</string>
     <string name="plugin_details_compatibility">Compatibility: %1$s</string>
     <string name="plugin_details_installed_version">Installed version</string>
-    <string name="plugin_details_your_noxs">Your Noxs</string>
-    <string name="plugin_update_noxs_required">Update Noxs to %1$s or newer to use this plugin.</string>
+    <string name="plugin_details_your_noxs">Your NxKali</string>
+    <string name="plugin_update_noxs_required">Update NxKali to %1$s or newer to use this plugin.</string>
 
     <!-- Header / session state (UI redesign) -->
     <string name="state_running">RUNNING</string>
@@ -541,20 +541,20 @@
     <string name="settings_header_stats">Show CPU and memory in header</string>
     <string name="settings_header_stats_desc">Live resource usage next to the session name</string>
     <string name="settings_dark_theme">Dark theme</string>
-    <string name="settings_dark_theme_desc">Noxs uses one high-contrast dark theme across the app</string>
+    <string name="settings_dark_theme_desc">NxKali uses one high-contrast dark theme across the app</string>
     <!-- Settings redesign: sections, descriptions, numeric/network validation -->
     <string name="settings_section_general">General</string>
     <string name="settings_section_storage">Storage &amp; Performance</string>
     <string name="settings_header_stats_short">Show CPU and memory in header</string>
     <string name="settings_header_stats_short_desc">Display CPU and memory usage in the terminal header</string>
-    <string name="settings_keep_awake_desc">Keep CPU awake — servers stay reachable outside Noxs</string>
+    <string name="settings_keep_awake_desc">Keep CPU awake — servers stay reachable outside NxKali</string>
     <string name="settings_max_sessions_desc">Maximum concurrent terminal sessions</string>
     <string name="settings_max_procs_desc">Maximum processes allowed in a session</string>
     <string name="settings_storage_warn_desc">Alert when storage usage exceeds this value (MB)</string>
     <string name="settings_rootfs_url_desc">Use a custom Linux root filesystem URL (https)</string>
     <string name="settings_dns_desc">Guest DNS servers, one per line (IPv4/IPv6)</string>
-    <string name="settings_dns_note">Applies to the Linux environment resolver (/etc/resolv.conf inside Noxs) — Android system DNS is never modified.</string>
-    <string name="settings_url_note">Optional. Leave empty to use the official Noxs mirrors. Remote downloads require https.</string>
+    <string name="settings_dns_note">Applies to the Linux environment resolver (/etc/resolv.conf inside NxKali) — Android system DNS is never modified.</string>
+    <string name="settings_url_note">Optional. Leave empty to use the official NxKali mirrors. Remote downloads require https.</string>
     <string name="settings_value_sessions">%1$d concurrent sessions</string>
     <string name="settings_value_processes">%1$d processes</string>
     <string name="settings_value_mb">%1$d MB</string>
@@ -575,7 +575,7 @@
     <string name="title_editor">Editor</string>
     <string name="nav_editor">Editor</string>
 
-<!-- NoxOS emulator (Noxs × NoxOS integration, M2+) -->
+<!-- NoxOS emulator (NxKali × NoxOS integration, M2+) -->
     <string name="nav_noxos">NoxOS</string>
     <string name="title_emulator">NoxOS Emulator</string>
     <string name="emulator_status_idle">NoxOS is ready to boot</string>
@@ -594,8 +594,8 @@
     <string name="emulator_display">NoxOS display</string>
     <string name="emulator_fullscreen">Full screen</string>
     <string name="emulator_fullscreen_exit">Exit full screen</string>
-    <string name="emulator_setup_required">The Noxs Linux environment is not set up yet. Open the terminal setup first, then boot NoxOS.</string>
-    <string name="emulator_stops_on_exit">Note: the VM keeps running while Noxs is alive; it stops if Android kills the app (background handling arrives in M8).</string>
+    <string name="emulator_setup_required">The NxKali Linux environment is not set up yet. Open the terminal setup first, then boot NoxOS.</string>
+    <string name="emulator_stops_on_exit">Note: the VM keeps running while NxKali is alive; it stops if Android kills the app (background handling arrives in M8).</string>
     <!-- Live setup progress (percent + stage, M2) -->
     <string name="emulator_percent_format">%1$d%% · %2$s</string>
     <string name="emulator_stage_storage">Preparing VM storage…</string>
@@ -630,7 +630,7 @@
     <string name="editor_chip_failed">failed</string>
     <string name="editor_chip_stopped">stopped</string>
     <string name="editor_phase_checking">Checking the code-server installation…</string>
-    <string name="editor_phase_installing">Installing code-server into your Noxs environment…</string>
+    <string name="editor_phase_installing">Installing code-server into your NxKali environment…</string>
     <string name="editor_phase_starting">Starting the code-server…</string>
     <string name="editor_phase_opening">Opening the workspace…</string>
     <string name="editor_phase_failed">The editor could not start</string>
