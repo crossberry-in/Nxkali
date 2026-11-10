@@ -1,0 +1,28 @@
+name: offline-kali-package
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-offline-package:
+    name: Build Kali ARM64 offline ZIP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify package
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
+          chmod +x scripts/build-offline-rootfs.sh
+          scripts/build-offline-rootfs.sh dist
+          unzip -t dist/NxKali-Offline-ARM64.zip
+          sha256sum -c dist/NxKali-Offline-ARM64.zip.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NxKali-Offline-ARM64
+          path: |
+            dist/NxKali-Offline-ARM64.zip
+            dist/NxKali-Offline-ARM64.zip.sha256
+            dist/offline-package.json
+          if-no-files-found: error
+          retention-days: 30
