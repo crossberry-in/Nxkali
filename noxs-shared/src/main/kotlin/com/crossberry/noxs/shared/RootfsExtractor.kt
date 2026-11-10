@@ -6,7 +6,8 @@
  *  - absolute paths           → rejected
  *  - ".." traversal           → rejected
  *  - symlink/hardlink escapes → rejected (link targets resolved against root)
- *  - device/fifo/special      → rejected
+ *  - /dev device/fifo nodes   → skipped (host /dev is bind-mounted by PRoot)
+ *  - special entries elsewhere → rejected
  *  - setuid/setgid bits       → stripped
  *  - extraction bombs         → capped by NoxsConstants.MAX_ROOTFS_BYTES
  *
@@ -203,6 +204,25 @@ class RootfsExtractor(private val root: File) {
                 applyMode(out, entry.mode)
                 files++
             }
+            TarReader.Type.SPECIAL -> {
+                // Kali NetHunter rootfs archives include device nodes and FIFOs under /dev.
+                // Android app storage cannot create these nodes, and PRoot bind-mounts the
+                // host /dev at runtime, so validate the path and safely omit the archive node.
+                val entryPath = TarGuard.safeResolve(root, entry.name).toPath().toAbsolutePath().normalize()
+                val rootPath = root.toPath().toAbsolutePath().normalize()
+                if (!entryPath.startsWith(rootPath) || entryPath == rootPath) {
+                    throw SecurityException("Special entry escapes rootfs: ${entry.name}")
+                }
+                val parts = rootPath.relativize(entryPath).map { it.toString() }
+                val isDevNode = parts.size >= 2 && (
+                    parts[0] == "dev" ||
+                    (parts.size >= 3 && parts[0] == "kali-arm64" && parts[1] == "dev")
+                )
+                if (!isDevNode) {
+                    throw SecurityException("Unsupported special entry outside /dev: ${entry.name}")
+                }
+                // Intentionally do not create a device node or FIFO in app storage.
+            }
             else -> throw SecurityException("Unsupported special entry: ${entry.name}")
         }
     }
@@ -234,7 +254,7 @@ object RootfsLinkQueue {
  */
 class TarReader(private val input: InputStream) {
 
-    enum class Type { REGULAR, DIR, SYMLINK, HARDLINK, OTHER }
+    enum class Type { REGULAR, DIR, SYMLINK, HARDLINK, SPECIAL, OTHER }
 
     data class Entry(
         val name: String,
@@ -291,6 +311,7 @@ class TarReader(private val input: InputStream) {
                 '5'.code -> Type.DIR
                 '2'.code -> Type.SYMLINK
                 '1'.code -> Type.HARDLINK
+                '3'.code, '4'.code, '6'.code -> Type.SPECIAL // char, block, FIFO
                 else -> Type.OTHER
             }
             val entry = Entry(effectiveName, type, size, mode, linkName)
