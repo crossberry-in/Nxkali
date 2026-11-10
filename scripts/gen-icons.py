@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""gen-icons.py — generate Noxs launcher PNGs (original tooling).
+"""gen-icons.py — generate NxKali launcher PNGs (original tooling).
 
-Rasterizes the Noxs "N" vector (same paths as res/drawable/ic_noxs_logo.xml)
+Rasterizes the NxKali "N" vector (same paths as res/drawable/ic_nxkali_logo.xml)
 into mipmap-*/ic_launcher.png + ic_launcher_round.png for API < 26 devices.
 Pure Python (struct + zlib), no PIL required.
 """
@@ -11,13 +11,17 @@ import sys
 import zlib
 from pathlib import Path
 
-# Vector paths from ic_noxs_logo.xml (108x108 viewport)
-N_POLYGON = [(30, 78), (30, 30), (38, 30), (64, 62), (64, 30), (72, 30),
-             (72, 78), (64, 78), (38, 46), (38, 78)]
-BAR_POLYGON = [(30, 84), (78, 84), (78, 88), (30, 88)]
-BG = (0x00, 0x00, 0x00, 0xFF)
-WHITE = (0xFF, 0xFF, 0xFF, 0xFF)
-GRAY = (0xBD, 0xBD, 0xBD, 0xFF)
+# Vector paths from ic_nxkali_logo.xml (108x108 viewport)
+N_POLYGON = [(23, 79), (23, 29), (39, 29), (69, 65), (69, 29), (85, 29),
+             (85, 79), (69, 79), (39, 43), (39, 79)]
+BAR_POLYGON = [(23, 86), (85, 86), (85, 91), (23, 91)]
+ACCENT_POLYGON = [(75, 20), (85, 20), (85, 10), (95, 10), (95, 20),
+                  (105, 20), (105, 30), (95, 30), (95, 40), (85, 40),
+                  (85, 30), (75, 30)]
+BG = (0x0B, 0x10, 0x20, 0xFF)
+WHITE = (0x45, 0xD7, 0xFF, 0xFF)
+GRAY = (0xB6, 0xF3, 0xFF, 0xFF)
+ACCENT = (0x8B, 0x5C, 0xF6, 0xFF)
 
 
 def point_in_poly(x, y, poly):
@@ -43,6 +47,8 @@ def render(size):
             vx = (px + 0.5) * 108.0 / total
             if point_in_poly(vx, vy, N_POLYGON):
                 c = WHITE
+            elif point_in_poly(vx, vy, ACCENT_POLYGON):
+                c = ACCENT
             elif point_in_poly(vx, vy, BAR_POLYGON):
                 c = GRAY
             else:
@@ -108,4 +114,4 @@ def main(root):
 if __name__ == "__main__":
     root = sys.argv[1] if len(sys.argv) > 1 else "."
     main(root)
-    print("[noxs] launcher icons generated")
+    print("[nxkali] launcher icons generated")
