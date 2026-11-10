@@ -648,6 +648,13 @@ object RootfsConfigurator {
         homeNoxs.mkdirs()
         homeRoot.mkdirs()
 
+        // Match Kali quiet-login behavior for both interactive accounts.
+        // Preserve any existing user-managed file; create it like touch ~/.hushlogin.
+        listOf(homeNoxs, homeRoot).forEach { home ->
+            val hushLogin = File(home, ".hushlogin")
+            if (!hushLogin.exists()) writeFile(hushLogin, "")
+        }
+
         listOf(".bashrc", ".profile").forEach { name ->
             val skel = File(rootfs, "etc/skel/$name")
             listOf(homeNoxs, homeRoot).forEach { dir ->
