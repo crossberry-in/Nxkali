@@ -112,6 +112,29 @@ class RootfsExtractorTest {
         assertTrue(File(root, "usr/bin/passwd").canExecute())
     }
 
+    @Test fun `re-extracts over read-only files and directories after interruption`() {
+        val root = tmp.newFolder("rootfs")
+        val etc = File(root, "etc").apply { mkdirs() }
+        val machineId = File(etc, "machine-id").apply { writeText("partial") }
+        val lineId = File(root, "line-id").apply { writeText("partial") }
+
+        // Simulate files/directories left behind by an interrupted extraction
+        // after tar modes removed owner write permission.
+        machineId.setWritable(false, false)
+        lineId.setWritable(false, false)
+        etc.setWritable(false, false)
+
+        val tar = tarEntries(
+            dirEntry("etc"),
+            fileEntry("etc/machine-id", "fresh-machine-id\n", mode = 292 /* 0444 */),
+            fileEntry("line-id", "fresh-line-id\n", mode = 292 /* 0444 */)
+        )
+        RootfsExtractor(root).extract(writeGzip(tar))
+
+        assertEquals("fresh-machine-id\n", machineId.readText())
+        assertEquals("fresh-line-id\n", lineId.readText())
+    }
+
     // ---------- Security cases ----------
 
     @Test fun `rejects dot-dot traversal entry`() {
