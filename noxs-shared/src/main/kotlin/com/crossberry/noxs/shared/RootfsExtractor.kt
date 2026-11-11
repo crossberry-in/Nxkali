@@ -84,6 +84,9 @@ class RootfsExtractor(private val root: File) {
         RootfsLinkQueue.drain()
         root.mkdirs()
         if (!root.isDirectory) throw IOException("Cannot create rootfs directory: $root")
+        // A previous interrupted extraction may have left the rootfs root read-only.
+        // App-private storage must remain writable while the archive is being unpacked.
+        root.setWritable(true, true)
         val base: InputStream = BufferedInputStream(FileInputStream(archive), 256 * 1024)
         val tarStream: InputStream = when {
             archive.name.endsWith(".tar.xz") -> XZInputStream(base)
@@ -122,7 +125,14 @@ class RootfsExtractor(private val root: File) {
                 return resolved.isDirectory || resolved.mkdirs()
             }
         }
-        return dir.isDirectory || dir.mkdirs() || dir.isDirectory
+        if (dir.exists()) {
+            if (!dir.isDirectory) return false
+            // Interrupted/older extractions can leave directories without owner write
+            // permission. Restore it before adding the next archive entry.
+            dir.setWritable(true, true)
+            return dir.isDirectory && dir.canWrite()
+        }
+        return dir.mkdirs() || dir.isDirectory
     }
 
     /**
@@ -221,8 +231,15 @@ class RootfsExtractor(private val root: File) {
                 if (bytes > NoxsConstants.MAX_ROOTFS_BYTES) {
                     throw SecurityException("Archive exceeds MAX_ROOTFS_BYTES — possible extraction bomb")
                 }
-                runCatching {
-                    if (Files.isSymbolicLink(out.toPath())) Files.delete(out.toPath())
+                // Make extraction restart-safe. A previous attempt may have created
+                // this file with mode 0444 (for example /etc/machine-id), so opening it
+                // with outputStream() would fail with EACCES. Delete the directory entry
+                // itself (including a symlink) before creating the replacement.
+                val outPath = out.toPath()
+                try {
+                    Files.deleteIfExists(outPath)
+                } catch (e: Exception) {
+                    throw IOException("Cannot replace existing rootfs file: ${entry.name}", e)
                 }
                 out.outputStream().use { fos -> payload.copyTo(fos, 128 * 1024) }
                 applyMode(out, entry.mode)
